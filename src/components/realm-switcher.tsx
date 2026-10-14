@@ -219,9 +219,10 @@ export function RealmSwitcher({
                   <span className="realm-thumbnail">
                     <img
                       alt=""
+                      decoding="async"
                       draggable="false"
                       loading="lazy"
-                      src={`/realms/${realm.id}/preview.png`}
+                      src={`/realms/${realm.id}/preview.webp`}
                     />
                     <span className="realm-layer-count">{realm.layerCount} layers</span>
                   </span>

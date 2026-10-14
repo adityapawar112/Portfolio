@@ -16,6 +16,16 @@ export function useUiSounds() {
     localStorage.setItem("portfolio-muted", String(isMuted));
   }, [isMuted]);
 
+  useEffect(() => {
+    (Object.keys(sounds) as UiSound[]).forEach((sound) => {
+      if (!audioCache.current.has(sound)) {
+        const audio = new Audio(sounds[sound]);
+        audio.preload = "auto";
+        audioCache.current.set(sound, audio);
+      }
+    });
+  }, []);
+
   const playRaw = useCallback((sound: UiSound, volume = 0.32) => {
     let audio = audioCache.current.get(sound);
 

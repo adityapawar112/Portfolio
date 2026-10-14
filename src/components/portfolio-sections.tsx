@@ -255,12 +255,12 @@ const projects = [
       { label: "Bootstrap", icon: packageIcon },
     ],
     media: [
-      { src: "/projects/scalerp-desktop/whatsapp-manager.png", alt: "ScaleERP WhatsApp manager" },
-      { src: "/projects/scalerp-desktop/add-transaction.png", alt: "ScaleERP add transaction form" },
-      { src: "/projects/scalerp-desktop/custom-bills.png", alt: "ScaleERP custom invoice settings" },
-      { src: "/projects/scalerp-desktop/invoice-preview.png", alt: "ScaleERP supplier invoice preview" },
-      { src: "/projects/scalerp-desktop/marathi-dashboard.png", alt: "ScaleERP dashboard in Marathi" },
-      { src: "/projects/scalerp-desktop/reports-analysis.png", alt: "ScaleERP reports and analysis" },
+      { src: "/projects/scalerp-desktop/whatsapp-manager.webp", alt: "ScaleERP WhatsApp manager" },
+      { src: "/projects/scalerp-desktop/add-transaction.webp", alt: "ScaleERP add transaction form" },
+      { src: "/projects/scalerp-desktop/custom-bills.webp", alt: "ScaleERP custom invoice settings" },
+      { src: "/projects/scalerp-desktop/invoice-preview.webp", alt: "ScaleERP supplier invoice preview" },
+      { src: "/projects/scalerp-desktop/marathi-dashboard.webp", alt: "ScaleERP dashboard in Marathi" },
+      { src: "/projects/scalerp-desktop/reports-analysis.webp", alt: "ScaleERP reports and analysis" },
     ],
   },
   {
@@ -283,8 +283,8 @@ const projects = [
       { label: "Tailwind CSS", icon: windIcon },
     ],
     media: [
-      { src: "/projects/scalerp-web/landing-scalererp-web.png", alt: "ScaleERP website landing page" },
-      { src: "/projects/scalerp-web/features-scalererp-web.png", alt: "ScaleERP website platform page" },
+      { src: "/projects/scalerp-web/landing-scalererp-web.webp", alt: "ScaleERP website landing page" },
+      { src: "/projects/scalerp-web/features-scalererp-web.webp", alt: "ScaleERP website platform page" },
     ],
   },
 ];
@@ -595,6 +595,8 @@ export function ProjectsSection({ playSound }: SectionProps) {
                       <div className="project-media-frame">
                         <img
                           alt={project.media[activeMedia].alt}
+                          decoding="async"
+                          loading="lazy"
                           src={project.media[activeMedia].src}
                         />
                       </div>

@@ -21,6 +21,8 @@ import { PixelIcon } from "./components/ui/pixel-icon";
 import { realms } from "./data/realms";
 import { useUiSounds } from "./hooks/use-ui-sounds";
 import { initializeAnalytics, trackPageView } from "./lib/analytics";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const menuItems = [
   {
@@ -146,7 +148,7 @@ export default function App() {
         const image = new Image();
         image.onload = () => resolve();
         image.onerror = () => resolve();
-        image.src = `/realms/${initialRealm.id}/layer-${index + 1}.png`;
+        image.src = `/realms/${initialRealm.id}/layer-${index + 1}.webp`;
       });
     });
 
@@ -246,7 +248,7 @@ export default function App() {
             key={`${activeRealm.id}-${index}`}
             style={
               {
-                "--layer-image": `url("/realms/${activeRealm.id}/layer-${index + 1}.png")`,
+                "--layer-image": `url("/realms/${activeRealm.id}/layer-${index + 1}.webp")`,
                 "--layer-duration": getLayerDuration(index, activeRealm.layerCount),
                 "--layer-index": index,
               } as React.CSSProperties
@@ -481,6 +483,13 @@ export default function App() {
           </div>
           <div className="loading-copy">Preparing pixels...</div>
         </div>
+      )}
+
+      {analyticsConsent === "accepted" && (
+        <>
+          <Analytics route={activeSection ? `/#${activeSection}` : "/"} />
+          <SpeedInsights route={activeSection ? `/#${activeSection}` : "/"} />
+        </>
       )}
     </main>
   );
