@@ -123,10 +123,27 @@ button {
   font-family: var(--font-display);
 }
 
+a,
 button,
-[role="button"] {
+[role="button"],
+.realm-hint {
   -webkit-tap-highlight-color: transparent;
-  cursor: url("/cursors/pointer.png") 12 1, pointer;
+  cursor: url("/cursors/pointer.png") 12 4, pointer;
+}
+
+a:hover,
+a:active,
+a:focus-visible,
+button:hover,
+button:active,
+button:focus-visible,
+[role="button"]:hover,
+[role="button"]:active,
+[role="button"]:focus-visible,
+.realm-hint:hover,
+.realm-hint:active,
+.realm-hint:focus-visible {
+  cursor: url("/cursors/pointer.png") 12 4, pointer;
 }
 
 ::selection {
@@ -280,7 +297,13 @@ li,
   border: 0;
   border-radius: 0;
   outline: none;
-  cursor: pointer;
+  cursor: url("/cursors/pointer.png") 12 4, pointer;
+}
+
+.bit-button:hover,
+.bit-button:active,
+.bit-button:focus-visible {
+  cursor: url("/cursors/pointer.png") 12 4, pointer;
 }
 
 .bit-button:focus-visible {
@@ -750,6 +773,19 @@ li,
   white-space: nowrap;
   box-shadow: 0 0.4rem 0 var(--realm-dark);
   animation: hint-arrive 180ms ease-out;
+  cursor: url("/cursors/pointer.png") 12 4, pointer;
+  user-select: none;
+  transition:
+    filter 120ms ease,
+    transform 120ms ease;
+}
+
+.realm-hint:hover {
+  filter: brightness(1.08);
+}
+
+.realm-hint:active {
+  transform: translateY(var(--pixel-unit));
 }
 
 .realm-hint::before {
@@ -1473,41 +1509,23 @@ li,
 
 .tutorial-footer {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.65rem;
   margin-top: 1rem;
   padding-top: 0.8rem;
   border-top: 0.0625rem dashed color-mix(in oklch, var(--realm-accent) 38%, transparent);
 }
 
-.tutorial-footer > div:first-child {
+.tutorial-buttons-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  max-width: 5rem;
-}
-
-.tutorial-footer > div:first-child span {
-  width: 0.35rem;
-  height: 0.35rem;
-  background: color-mix(in oklch, var(--mist-muted) 36%, transparent);
-}
-
-.tutorial-footer > div:first-child span.is-complete {
-  background: var(--realm-bright);
-}
-
-.tutorial-navigation {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.45rem;
-  margin-left: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .tutorial-explore {
-  min-height: 2.35rem;
+  min-height: 2.25rem;
   padding: 0.35rem 0.55rem;
   color: var(--realm-bright);
   background: color-mix(in oklch, var(--realm-accent) 10%, transparent);
@@ -1515,12 +1533,57 @@ li,
   white-space: nowrap;
 }
 
+.tutorial-step-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tutorial-previous {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0;
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 10%, transparent);
+}
+
+.tutorial-previous.is-disabled,
+.tutorial-previous:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  box-shadow: none;
+}
+
 .tutorial-next {
+  display: inline-flex;
+  align-items: center;
   gap: 0.45rem;
-  min-height: 2.35rem;
+  min-height: 2.25rem;
   padding: 0.35rem 0.65rem;
   font-size: 0.65rem;
   white-space: nowrap;
+}
+
+.tutorial-steps-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.tutorial-steps-bar span {
+  flex: 1;
+  height: 0.25rem;
+  background: color-mix(in oklch, var(--mist-muted) 36%, transparent);
+  transition: background-color 150ms ease;
+}
+
+.tutorial-steps-bar span.is-complete {
+  background: var(--realm-bright);
+  box-shadow: 0 0 0.35rem color-mix(in oklch, var(--realm-bright) 50%, transparent);
 }
 
 .tutorial-resume-trigger {
@@ -2917,15 +2980,6 @@ li,
 }
 
 @media (max-width: 30rem) {
-  .realm-controls {
-    right: 1.25rem;
-  }
-
-  .control-row {
-    justify-content: space-between;
-    width: 100%;
-  }
-
   .tutorial-callout {
     max-height: calc(100svh - 2rem);
     overflow-y: auto;
@@ -2937,20 +2991,6 @@ li,
 
   .tutorial-copy {
     font-size: 0.75rem;
-  }
-
-  .tutorial-footer {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .tutorial-navigation {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .tutorial-explore {
-    margin-right: auto;
   }
 }
 

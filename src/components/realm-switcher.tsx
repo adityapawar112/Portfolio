@@ -39,10 +39,6 @@ export function RealmSwitcher({
     [activeCategory],
   );
 
-  useEffect(() => {
-    const hintTimer = window.setTimeout(() => setShowRealmHint(false), 3000);
-    return () => window.clearTimeout(hintTimer);
-  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -147,7 +143,23 @@ export function RealmSwitcher({
       </div>
 
       {showRealmHint && !isOpen && (
-        <div aria-live="polite" className="realm-hint" role="status">
+        <div
+          aria-live="polite"
+          className="realm-hint"
+          onClick={() => {
+            setShowRealmHint(false);
+            playSound("ding", 0.16);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              setShowRealmHint(false);
+              playSound("ding", 0.16);
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          title="Click to dismiss"
+        >
           Switch realms, meow
         </div>
       )}

@@ -262,7 +262,7 @@ export function PortfolioTutorial({
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        onPause(stepIndex);
+        onClose();
       } else if (event.key === "Enter" || event.key === "ArrowRight") {
         event.preventDefault();
         goNext();
@@ -312,7 +312,7 @@ export function PortfolioTutorial({
             className="tutorial-close"
             onClick={() => {
               playSound("ding", 0.16);
-              onPause(stepIndex);
+              onClose();
             }}
             title="Exit tutorial"
             variant="ghost"
@@ -369,15 +369,7 @@ export function PortfolioTutorial({
         )}
 
         <div className="tutorial-footer">
-          <div aria-label={`Tutorial step ${stepIndex + 1} of ${tutorialSteps.length}`}>
-            {tutorialSteps.map((tutorialStep, index) => (
-              <span
-                className={index <= stepIndex ? "is-complete" : ""}
-                key={tutorialStep.title}
-              />
-            ))}
-          </div>
-          <div className="tutorial-navigation">
+          <div className="tutorial-buttons-row">
             <Button
               className="tutorial-explore"
               onClick={() => {
@@ -388,20 +380,35 @@ export function PortfolioTutorial({
             >
               Explore freely
             </Button>
-            {stepIndex > 0 && (
+            <div className="tutorial-step-nav">
               <Button
                 aria-label="Previous tutorial step"
-                className="tutorial-previous"
-                onClick={() => moveToStep(stepIndex - 1)}
+                className={`tutorial-previous${stepIndex === 0 ? " is-disabled" : ""}`}
+                disabled={stepIndex === 0}
+                onClick={() => {
+                  if (stepIndex > 0) moveToStep(stepIndex - 1);
+                }}
                 variant="ghost"
               >
                 <PixelIcon source={arrowLeftIcon} />
               </Button>
-            )}
-            <Button className="tutorial-next" onClick={goNext}>
-              {step.prompt}
-              <PixelIcon source={arrowRightIcon} />
-            </Button>
+              <Button className="tutorial-next" onClick={goNext}>
+                <span>{step.prompt}</span>
+                <PixelIcon source={arrowRightIcon} />
+              </Button>
+            </div>
+          </div>
+
+          <div
+            aria-label={`Tutorial step ${stepIndex + 1} of ${tutorialSteps.length}`}
+            className="tutorial-steps-bar"
+          >
+            {tutorialSteps.map((tutorialStep, index) => (
+              <span
+                className={index <= stepIndex ? "is-complete" : ""}
+                key={tutorialStep.title}
+              />
+            ))}
           </div>
         </div>
       </div>
