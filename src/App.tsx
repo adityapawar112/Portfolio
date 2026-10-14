@@ -504,7 +504,10 @@ export default function App() {
 
       {analyticsConsent === "accepted" && (
         <>
-          <Analytics route={activeSection ? `/#${activeSection}` : "/"} />
+          <Analytics
+            route={activeSection ? `/#${activeSection}` : "/"}
+            path={activeSection ? `/#${activeSection}` : "/"}
+          />
           <SpeedInsights route={activeSection ? `/#${activeSection}` : "/"} />
         </>
       )}
