@@ -1,0 +1,9 @@
+/* TEAM */
+Developer: Aditya Pawar
+Contact: contact.aditya.pawar@gmail.com
+Location: Pune, India
+
+/* SITE */
+Stack: React, TypeScript, Vite, Tailwind CSS
+Design: Realm-themed pixel-art portfolio
+Language: English

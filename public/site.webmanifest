@@ -1,0 +1,17 @@
+{
+  "name": "Aditya Pawar Portfolio",
+  "short_name": "Aditya Pawar",
+  "description": "Fullstack developer portfolio featuring web, API, and offline-first desktop projects.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071817",
+  "theme_color": "#071817",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

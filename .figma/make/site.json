@@ -1,0 +1,18 @@
+{
+  "title": "Aditya Pawar | Fullstack Developer",
+  "description": "Portfolio of Aditya Pawar, a Pune-based fullstack developer building Next.js applications, REST APIs, secure workflows, and offline-first desktop software.",
+  "language": "en",
+  "robots": {
+    "index": true
+  },
+  "icons": {
+    "icon": "/favicon.svg"
+  },
+  "openGraph": {
+    "image": "/og-image.png"
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

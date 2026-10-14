@@ -1,0 +1,25 @@
+# Aditya Pawar — Fullstack Developer
+
+> Portfolio for Aditya Pawar, a Pune-based fullstack developer focused on web platforms, REST APIs, secure workflows, and offline-first desktop applications.
+
+## Main sections
+
+- About: professional background, work habits, interests, and education.
+- Skills: TypeScript, React, Next.js, Electron, SQL databases, security, testing, and delivery tooling.
+- Experience: production web applications, payment systems, automation, and multi-tenant platforms.
+- Projects: ScaleERP Desktop and ScaleERP Web, including feature summaries, technology stacks, source links, and product screenshots.
+
+## Selected work
+
+- ScaleERP Desktop: https://github.com/adityapawar112/ScaleERP-Desktop
+- ScaleERP Web: https://github.com/adityapawar112/ScaleERP-Web
+- ScaleERP live site: https://scale-erp.vercel.app/
+
+## Contact
+
+- Email: contact.aditya.pawar@gmail.com
+- LinkedIn: https://www.linkedin.com/in/adityapawar112/
+- GitHub: https://github.com/adityapawar112
+- Resume: https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing
+
+The site uses hash routes for its portfolio sections and provides a realm-themed pixel-art interface.
