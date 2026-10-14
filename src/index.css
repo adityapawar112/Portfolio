@@ -785,22 +785,17 @@ li,
   background:
     repeating-linear-gradient(
       180deg,
-      transparent 0,
-      transparent 0.2rem,
-      oklch(2% 0.01 200 / 13%) 0.2rem,
-      oklch(2% 0.01 200 / 13%) 0.235rem
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.25) 2px,
+      rgba(0, 0, 0, 0.25) 4px
     ),
-    repeating-linear-gradient(
-      90deg,
-      oklch(65% 0.18 25 / 2%) 0,
-      oklch(65% 0.18 25 / 2%) 0.08rem,
-      oklch(72% 0.17 145 / 2%) 0.08rem,
-      oklch(72% 0.17 145 / 2%) 0.16rem,
-      oklch(68% 0.16 255 / 2%) 0.16rem,
-      oklch(68% 0.16 255 / 2%) 0.24rem
+    radial-gradient(
+      ellipse at center,
+      transparent 60%,
+      rgba(0, 0, 0, 0.35) 100%
     );
-  opacity: 0.72;
-  mix-blend-mode: soft-light;
+  opacity: 0.85;
 }
 
 .crt-enabled .crt-scanlines {
