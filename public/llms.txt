@@ -4,22 +4,20 @@
 
 ## Main sections
 
-- About: professional background, work habits, interests, and education.
-- Skills: TypeScript, React, Next.js, Electron, SQL databases, security, testing, and delivery tooling.
-- Experience: production web applications, payment systems, automation, and multi-tenant platforms.
-- Projects: ScaleERP Desktop and ScaleERP Web, including feature summaries, technology stacks, source links, and product screenshots.
+- [About Me](https://aditya112-portfolio.vercel.app/#about): Professional background, engineering approach, creative interests, and education.
+- [Skills](https://aditya112-portfolio.vercel.app/#skills): TypeScript, React, Next.js, Electron, SQL databases, security, testing, and delivery tooling.
+- [Experience](https://aditya112-portfolio.vercel.app/#experience): Production web applications, payment systems, automation, and multi-tenant platforms.
+- [Projects](https://aditya112-portfolio.vercel.app/#projects): ScaleERP Desktop and ScaleERP Web, including feature summaries, technology stacks, source links, and product screenshots.
 
 ## Selected work
 
-- ScaleERP Desktop: https://github.com/adityapawar112/ScaleERP-Desktop
-- ScaleERP Web: https://github.com/adityapawar112/ScaleERP-Web
-- ScaleERP live site: https://scale-erp.vercel.app/
+- [ScaleERP Desktop](https://github.com/adityapawar112/ScaleERP-Desktop): Offline-first Electron inventory and billing desktop software with SQLite.
+- [ScaleERP Web](https://github.com/adityapawar112/ScaleERP-Web): Next.js and Supabase cloud control plane for trials, licensing, and client telemetry.
+- [ScaleERP Live](https://scale-erp.vercel.app/): Live deployment of ScaleERP cloud service.
 
 ## Contact
 
-- Email: contact.aditya.pawar@gmail.com
-- LinkedIn: https://www.linkedin.com/in/adityapawar112/
-- GitHub: https://github.com/adityapawar112
-- Resume: https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing
-
-The site uses hash routes for its portfolio sections and provides a realm-themed pixel-art interface.
+- [Email](mailto:contact.aditya.pawar@gmail.com): contact.aditya.pawar@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/adityapawar112/): Aditya Pawar on LinkedIn
+- [GitHub](https://github.com/adityapawar112): @adityapawar112 on GitHub
+- [Resume](https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing): PDF resume on Google Drive

@@ -92,6 +92,7 @@ export function RealmSwitcher({
         <Button
           aria-controls="realm-popover"
           aria-expanded={isOpen}
+          aria-label={`Current realm: ${activeRealm.name}. Select to open realm menu`}
           className="control-button realm-trigger"
           data-tutorial-target="realm-switcher"
           onClick={toggleOpen}

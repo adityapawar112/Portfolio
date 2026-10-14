@@ -6,7 +6,9 @@ import path from 'node:path'
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL)
+  const siteUrl = normalizeSiteUrl(
+    env.VITE_SITE_URL || 'https://aditya112-portfolio.vercel.app',
+  )
 
   return {
     base: '/',

@@ -184,6 +184,18 @@ export function PortfolioTutorial({
   const [stepIndex, setStepIndex] = useState(initialStep);
   const [elapsed, setElapsed] = useState(0);
   const [targetRect, setTargetRect] = useState<TargetRect | null>(null);
+  const [matchedTarget, setMatchedTarget] = useState<string | null>(null);
+  const [activePosition, setActivePosition] = useState<ReturnType<typeof getCalloutPosition> | null>(() => {
+    if (typeof window === "undefined") return null;
+    const width = Math.min(352, window.innerWidth - 32);
+    return {
+      direction: "up",
+      left: Math.max(16, (window.innerWidth - width) / 2),
+      top: Math.max(16, (window.innerHeight - 300) / 2),
+      width,
+    };
+  });
+
   const step = tutorialSteps[stepIndex];
   const stepDuration = getStepDuration(step);
 
@@ -192,43 +204,52 @@ export function PortfolioTutorial({
   }, []);
 
   useEffect(() => {
+    let active = true;
+
     const updateTarget = () => {
+      if (!active) return;
       const target = document.querySelector<HTMLElement>(
         `[data-tutorial-target="${step.target}"]`,
       );
       if (!target) {
-        setTargetRect(null);
         return;
       }
 
       const rect = target.getBoundingClientRect();
-      setTargetRect({
+      const rectData: TargetRect = {
         bottom: rect.bottom,
         height: rect.height,
         left: rect.left,
         right: rect.right,
         top: rect.top,
         width: rect.width,
-      });
+      };
+
+      setTargetRect(rectData);
+      setMatchedTarget(step.target);
+      setActivePosition(getCalloutPosition(rectData));
     };
 
+    updateTarget();
     const frame = window.requestAnimationFrame(updateTarget);
-    const settleTimer = window.setTimeout(updateTarget, 180);
+    const timer1 = window.setTimeout(updateTarget, 80);
+    const timer2 = window.setTimeout(updateTarget, 200);
     window.addEventListener("resize", updateTarget);
     window.addEventListener("scroll", updateTarget, true);
 
     return () => {
+      active = false;
       window.cancelAnimationFrame(frame);
-      window.clearTimeout(settleTimer);
+      window.clearTimeout(timer1);
+      window.clearTimeout(timer2);
       window.removeEventListener("resize", updateTarget);
       window.removeEventListener("scroll", updateTarget, true);
     };
-  }, [step.target]);
+  }, [step.target, step.view]);
 
   const moveToStep = (nextIndex: number) => {
     const boundedIndex = Math.max(0, Math.min(nextIndex, tutorialSteps.length - 1));
     const nextStep = tutorialSteps[boundedIndex];
-    setTargetRect(null);
     setElapsed(0);
     setStepIndex(boundedIndex);
     onViewChange(nextStep.view);
@@ -276,7 +297,7 @@ export function PortfolioTutorial({
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
-  const calloutPosition = targetRect ? getCalloutPosition(targetRect) : null;
+  const isStepReady = matchedTarget === step.target;
   const overlayStyle = targetRect
     ? ({
         "--tutorial-height": `${targetRect.height}px`,
@@ -285,23 +306,25 @@ export function PortfolioTutorial({
         "--tutorial-width": `${targetRect.width}px`,
       } as CSSProperties)
     : undefined;
-  const calloutStyle = calloutPosition
+  const calloutStyle = activePosition
     ? ({
-        "--tutorial-callout-left": `${calloutPosition.left}px`,
-        "--tutorial-callout-top": `${calloutPosition.top}px`,
-        "--tutorial-callout-width": `${calloutPosition.width}px`,
+        "--tutorial-callout-left": `${activePosition.left}px`,
+        "--tutorial-callout-top": `${activePosition.top}px`,
+        "--tutorial-callout-width": `${activePosition.width}px`,
       } as CSSProperties)
     : undefined;
 
   return (
     <div aria-label="Guided portfolio tutorial" className="tutorial-layer" role="dialog">
       <div aria-hidden="true" className="tutorial-guard" />
-      {targetRect && <div aria-hidden="true" className="tutorial-spotlight" style={overlayStyle} />}
+      {isStepReady && targetRect && (
+        <div aria-hidden="true" className="tutorial-spotlight" style={overlayStyle} />
+      )}
 
       <div
         aria-live="polite"
-        className={`tutorial-callout tutorial-arrow-${calloutPosition?.direction ?? "up"}${
-          targetRect ? " is-ready" : ""
+        className={`tutorial-callout tutorial-arrow-${activePosition?.direction ?? "up"}${
+          isStepReady ? " is-ready" : ""
         }`}
         style={calloutStyle}
       >
