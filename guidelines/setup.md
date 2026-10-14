@@ -3,8 +3,8 @@
 ## Runtime
 
 - React 19, React DOM 19, TypeScript 5.7, Vite 8, and Tailwind CSS v4.
-- The Figma Make development server is already running. Do not run `pnpm dev`, `vite`, or another preview server.
-- Source changes hot reload in the existing preview.
+- Use `pnpm dev` for local development. Deploys to Vercel via Git integration.
+- Source changes hot reload in the Vite dev server.
 - Use `pnpm`; tool versions are defined in `.mise.toml`.
 
 ## Commands

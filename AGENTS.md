@@ -1,12 +1,11 @@
 # Aditya Pawar pixel portfolio
 
-React + Vite + TypeScript + Tailwind CSS v4 portfolio running inside Figma Make. The UI is a realm-themed retro game menu with parallax pixel backgrounds, hash-routed portfolio sections, 8-bit controls, UI sounds, custom cursors, and a toggleable CRT overlay.
+React + Vite + TypeScript + Tailwind CSS v4 portfolio deployed to Vercel. The UI is a realm-themed retro game menu with parallax pixel backgrounds, hash-routed portfolio sections, 8-bit controls, UI sounds, custom cursors, and a toggleable CRT overlay.
 
 ## Development Server
 
-A Vite development server is **already running** on `$PORT` (default 8443). You don't need to start it manually.
+Run `pnpm dev` for local development.
 
-- Preview URL: The user can access the running app through the preview panel
 - Hot reload: Changes to source files are reflected immediately
 
 ## Project Structure
@@ -25,7 +24,8 @@ This is the canonical project structure. Start with task-relevant files below. O
 - `guidelines/` - Durable setup, component, style, and token rules; read the relevant files before UI changes
 - `index.html` - Vite HTML shell containing the `#root` element and loading `src/main.tsx`
 - `package.json` - Project dependencies and the Vite build, development, preview, and formatting scripts
-- `vite.config.ts` - Vite configuration with React, Tailwind CSS v4, and Figma Make plugins plus the `@` alias for `src`
+- `vite.config.ts` - Vite configuration with React, Tailwind CSS v4, and SEO generation plus the `@` alias for `src`
+- `vercel.json` - Vercel deployment routing and configuration
 - `.mise.toml` - Toolchain versions for Node.js and pnpm
 
 ## Dependencies
