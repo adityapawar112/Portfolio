@@ -185,7 +185,6 @@ li,
 }
 
 .parallax-scene,
-.parallax-layer,
 .scene-light {
   position: absolute;
   inset: 0;
@@ -198,6 +197,11 @@ li,
 }
 
 .parallax-layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100vw + 177.7778vh);
   z-index: var(--layer-index);
   background-image: var(--layer-image);
   background-repeat: repeat-x;
@@ -206,13 +210,12 @@ li,
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   image-rendering: pixelated;
-  transform: translateZ(0);
   backface-visibility: hidden;
   animation-name: scroll-layer;
   animation-duration: var(--layer-duration);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  will-change: background-position;
+  will-change: transform;
 }
 
 .scene-light {
@@ -2621,11 +2624,11 @@ li,
 
 @keyframes scroll-layer {
   from {
-    background-position-x: 0;
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    background-position-x: -177.7778vh;
+    transform: translate3d(-177.7778vh, 0, 0);
   }
 }
 
