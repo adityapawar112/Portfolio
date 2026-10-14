@@ -2,9 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import closeIcon from "pixelarticons/svg/close.svg?url";
 import eyeOffIcon from "pixelarticons/svg/eye-off.svg?url";
 import monitorIcon from "pixelarticons/svg/monitor.svg?url";
+import musicIcon from "pixelarticons/svg/music.svg?url";
 import volumeIcon from "pixelarticons/svg/volume-2.svg?url";
 import volumeMutedIcon from "pixelarticons/svg/volume-x.svg?url";
 
+import { realmMusicTracks } from "../data/realm-music";
 import { realmCategories, realms, type Realm, type RealmCategoryId } from "../data/realms";
 import type { UiSound } from "../hooks/use-ui-sounds";
 import { Button } from "./ui/8bit-button";
@@ -14,6 +16,7 @@ interface RealmSwitcherProps {
   activeRealm: Realm;
   isCrtEnabled: boolean;
   isMuted: boolean;
+  onPreviewCategoryChange?: (category: RealmCategoryId | null) => void;
   onRealmChange: (realm: Realm) => void;
   onToggleCrt: () => void;
   onToggleMuted: () => void;
@@ -24,6 +27,7 @@ export function RealmSwitcher({
   activeRealm,
   isCrtEnabled,
   isMuted,
+  onPreviewCategoryChange,
   onRealmChange,
   onToggleCrt,
   onToggleMuted,
@@ -39,6 +43,7 @@ export function RealmSwitcher({
     [activeCategory],
   );
 
+  const currentMusic = realmMusicTracks[activeCategory];
 
   useEffect(() => {
     if (!isOpen) return;
@@ -46,6 +51,7 @@ export function RealmSwitcher({
     const handlePointerDown = (event: PointerEvent) => {
       if (!controlsRef.current?.contains(event.target as Node)) {
         setIsOpen(false);
+        onPreviewCategoryChange?.(null);
         playSound("ding");
       }
     };
@@ -53,6 +59,7 @@ export function RealmSwitcher({
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
+        onPreviewCategoryChange?.(null);
         playSound("ding");
       }
     };
@@ -64,25 +71,39 @@ export function RealmSwitcher({
       document.removeEventListener("pointerdown", handlePointerDown);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, playSound]);
+  }, [isOpen, onPreviewCategoryChange, playSound]);
+
+  const closePopover = () => {
+    setIsOpen(false);
+    onPreviewCategoryChange?.(null);
+    playSound("ding");
+  };
 
   const toggleOpen = () => {
     setShowRealmHint(false);
-    setActiveCategory(activeRealm.category);
     setIsOpen((current) => {
+      const next = !current;
       playSound("ding");
-      return !current;
+      if (next) {
+        setActiveCategory(activeRealm.category);
+        onPreviewCategoryChange?.(activeRealm.category);
+      } else {
+        onPreviewCategoryChange?.(null);
+      }
+      return next;
     });
   };
 
   const selectCategory = (category: RealmCategoryId) => {
     setActiveCategory(category);
+    onPreviewCategoryChange?.(category);
     playSound("ding", 0.22);
   };
 
   const selectRealm = (realm: Realm) => {
     onRealmChange(realm);
     setIsOpen(false);
+    onPreviewCategoryChange?.(null);
     playSound("chord", 0.38);
   };
 
@@ -173,14 +194,24 @@ export function RealmSwitcher({
           role="dialog"
         >
           <div className="popover-header">
-            <div>
-              <div className="popover-title">Realm Archive</div>
+            <div className="popover-title-wrapper">
+              <div className="popover-title-row">
+                <div className="popover-title">Realm Archive</div>
+                <div
+                  aria-label={`Current realm theme: ${currentMusic.title} (${currentMusic.game})`}
+                  className="popover-music-badge"
+                  title={`${currentMusic.title} (${currentMusic.game})`}
+                >
+                  <PixelIcon className="music-badge-icon" source={musicIcon} />
+                  <span className="music-badge-text">{currentMusic.badgeLabel}</span>
+                </div>
+              </div>
               <div className="popover-subtitle">52 looping worlds · choose your atmosphere</div>
             </div>
             <Button
               aria-label="Close realm archive"
               className="popover-close"
-              onClick={toggleOpen}
+              onClick={closePopover}
               variant="ghost"
             >
               <PixelIcon source={closeIcon} />

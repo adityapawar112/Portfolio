@@ -23,12 +23,23 @@ import trophyIcon from "pixelarticons/svg/trophy.svg?url";
 import userIcon from "pixelarticons/svg/user.svg?url";
 import windIcon from "pixelarticons/svg/wind.svg?url";
 import zapIcon from "pixelarticons/svg/zap.svg?url";
+import checkIcon from "pixelarticons/svg/check.svg?url";
+import contactIcon from "pixelarticons/svg/contact.svg?url";
+import copyIcon from "pixelarticons/svg/copy.svg?url";
+import fileTextIcon from "pixelarticons/svg/file-text.svg?url";
+import heartIcon from "pixelarticons/svg/heart.svg?url";
+import imageIcon from "pixelarticons/svg/image.svg?url";
+import linkedinIcon from "pixelarticons/svg/linkedin.svg?url";
+import mailIcon from "pixelarticons/svg/mail.svg?url";
+import musicIcon from "pixelarticons/svg/music.svg?url";
 
+import { realmMusicTracks } from "../data/realm-music";
+import { realmCategories } from "../data/realms";
 import type { UiSound } from "../hooks/use-ui-sounds";
 import { Button } from "./ui/8bit-button";
 import { PixelIcon } from "./ui/pixel-icon";
 
-export type PortfolioSectionId = "start" | "about" | "skills" | "experience" | "projects";
+export type PortfolioSectionId = "start" | "about" | "skills" | "experience" | "projects" | "contact";
 
 interface SectionProps {
   playSound: (sound: UiSound, volume?: number) => void;
@@ -873,6 +884,400 @@ export function NotFoundSection({ onHome, playSound }: SectionProps & { onHome: 
         <PixelIcon source={homeIcon} />
         Return Home
       </Button>
+    </div>
+  );
+}
+
+const contactChannels = [
+  {
+    id: "email",
+    title: "Direct Mail",
+    subtitle: "contact.aditya.pawar@gmail.com",
+    description: "Best channel for job opportunities, contracts, engineering discussions, and direct inquiries.",
+    actionLabel: "Send Transmission",
+    actionUrl: "mailto:contact.aditya.pawar@gmail.com",
+    icon: mailIcon,
+    copyValue: "contact.aditya.pawar@gmail.com",
+  },
+  {
+    id: "linkedin",
+    title: "LinkedIn Network",
+    subtitle: "adityapawar112",
+    description: "Professional background, career updates, collaborative connections, and peer recommendations.",
+    actionLabel: "View Profile",
+    actionUrl: "https://www.linkedin.com/in/adityapawar112/",
+    icon: linkedinIcon,
+  },
+  {
+    id: "github",
+    title: "GitHub Repositories",
+    subtitle: "@adityapawar112",
+    description: "Production codebases, open-source utilities, offline-first architectures, and experiments.",
+    actionLabel: "Open GitHub",
+    actionUrl: "https://github.com/adityapawar112",
+    icon: githubIcon,
+  },
+  {
+    id: "resume",
+    title: "Curriculum Vitae",
+    subtitle: "Aditya Pawar - Fullstack Developer",
+    description: "Comprehensive PDF detailing hands-on production engineering, tech stack, and achievements.",
+    actionLabel: "View Resume (PDF)",
+    actionUrl: "https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing",
+    icon: fileTextIcon,
+  },
+];
+
+const generalAttributions = [
+  {
+    title: "CraftPix Parallax Backgrounds",
+    category: "Environment Pixel Art",
+    author: "CraftPix.net",
+    description:
+      "All 52 layered looping pixel environments across Summer, Autumn, Winter, Forest, Mountains, Desert, Clouds, and Wasteland.",
+    primaryUrl: "https://craftpix.net",
+    primaryLabel: "CraftPix.net",
+    secondaryUrl: "https://craftpix.net/file-licenses/",
+    secondaryLabel: "CraftPix File Licenses",
+  },
+  {
+    title: "8bitcn",
+    category: "Design System & Primitives",
+    author: "8bitcn",
+    description:
+      "Retro 8-bit component primitives and pixel-art aesthetics adapted for React and Tailwind CSS.",
+    primaryUrl: "https://www.8bitcn.com/",
+    primaryLabel: "8bitcn.com",
+  },
+  {
+    title: "Google Fonts",
+    category: "Typography",
+    author: "Stefie Justprince & Oliver Schöndorfer",
+    description:
+      "Pixelify Sans (display titles and headlines) and Jersey 10 (body copy, retro stats, and metadata numbers).",
+    primaryUrl:
+      "https://fonts.google.com/share?selection.family=Jersey+10|Pixelify+Sans:wght@400..700",
+    primaryLabel: "Google Fonts Selection",
+  },
+  {
+    title: "Pixelarticons",
+    category: "Icons & Cursors",
+    author: "Gerrit Halfmann",
+    description:
+      "Open-source pixel-art SVG icon system and custom retro pixel sword / pointer cursor graphics.",
+    primaryUrl: "https://pixelarticons.com/",
+    primaryLabel: "pixelarticons.com",
+  },
+  {
+    title: "Retro UI Sound Effects",
+    category: "Interface Audio",
+    author: "Ambroggio",
+    description:
+      "8-bit synthesized retro audio feedback (Boop for hover, Ding for action, Chord for checkpoint/redirect).",
+    primaryUrl: "https://ambroggiomusic.itch.io/retro-ui-sfx",
+    primaryLabel: "itch.io Sound Pack",
+  },
+  {
+    title: "Web Engine & Deployment",
+    category: "Web Infrastructure",
+    author: "Open Source Ecosystem",
+    description:
+      "Built with React 19, TypeScript, Vite 8, Tailwind CSS v4, and deployed on Vercel with Web Analytics and Speed Insights.",
+    primaryUrl: "https://vercel.com",
+    primaryLabel: "Deployed on Vercel",
+  },
+];
+
+export function ContactSection({ playSound }: SectionProps) {
+  const [activeTab, setActiveTab] = useState<"contact" | "attributions">("contact");
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("contact.aditya.pawar@gmail.com");
+      setCopiedEmail(true);
+      playSound("ding", 0.2);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    } catch {
+      // ignore
+    }
+  };
+
+  const openExternal = (url: string) => {
+    playSound("chord", 0.3);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const openMail = () => {
+    playSound("chord", 0.3);
+    window.location.href = "mailto:contact.aditya.pawar@gmail.com";
+  };
+
+  return (
+    <div className="content-section">
+      <SectionHeading
+        action={
+          <div aria-label="Contact section views" className="contact-tab-toggle" role="group">
+            <Button
+              aria-label="Contact channels"
+              aria-pressed={activeTab === "contact"}
+              className="contact-tab-button"
+              onClick={() => {
+                setActiveTab("contact");
+                playSound("ding", 0.2);
+              }}
+              onPointerEnter={() => playSound("boop", 0.1)}
+              title="Contact channels"
+              variant={activeTab === "contact" ? "default" : "ghost"}
+            >
+              <PixelIcon source={mailIcon} />
+              <span>Contact</span>
+            </Button>
+            <Button
+              aria-label="Credits and attributions"
+              aria-pressed={activeTab === "attributions"}
+              className="contact-tab-button"
+              onClick={() => {
+                setActiveTab("attributions");
+                playSound("ding", 0.2);
+              }}
+              onPointerEnter={() => playSound("boop", 0.1)}
+              title="Credits & Attributions"
+              variant={activeTab === "attributions" ? "default" : "ghost"}
+            >
+              <PixelIcon source={heartIcon} />
+              <span>Credits</span>
+            </Button>
+          </div>
+        }
+        description={
+          activeTab === "contact"
+            ? "Direct communication channels, resume, and availability."
+            : "Open-source tools, sound effects, retro fonts, and pixel art attributions."
+        }
+        icon={contactIcon}
+        title={activeTab === "contact" ? "Contact" : "Credits & Attributions"}
+        tutorialTarget="section-contact"
+      />
+
+      {activeTab === "contact" ? (
+        <>
+          <div className="pixel-card contact-availability-card">
+            <div className="card-topline">
+              <span className="status-badge">Available Now</span>
+              <span className="contact-location">Pune, India · Remote / On-Site</span>
+            </div>
+            <div className="card-title">Open for Engineering Roles</div>
+            <div className="card-copy">
+              Actively seeking full-time Fullstack, Frontend, or Backend developer roles.
+              Experienced in building Next.js web applications, REST APIs, and offline-first desktop systems.
+            </div>
+          </div>
+
+          <div className="contact-grid">
+            {contactChannels.map((channel) => (
+              <div className="pixel-card contact-card" key={channel.id}>
+                <div>
+                  <div className="contact-card-header">
+                    <div className="contact-card-icon">
+                      <PixelIcon source={channel.icon} />
+                    </div>
+                    <div>
+                      <div className="card-title">{channel.title}</div>
+                      <div className="card-subtitle">{channel.subtitle}</div>
+                    </div>
+                  </div>
+                  <div className="card-copy">{channel.description}</div>
+                </div>
+
+                <div className="contact-card-actions">
+                  <Button
+                    className="contact-action-btn"
+                    onClick={() => {
+                      if (channel.id === "email") {
+                        openMail();
+                      } else {
+                        openExternal(channel.actionUrl);
+                      }
+                    }}
+                    onPointerEnter={() => playSound("boop", 0.1)}
+                    variant="default"
+                  >
+                    <PixelIcon source={channel.id === "email" ? mailIcon : externalLinkIcon} />
+                    {channel.actionLabel}
+                  </Button>
+
+                  {channel.copyValue && (
+                    <Button
+                      aria-label="Copy email address"
+                      className="contact-copy-btn"
+                      onClick={handleCopyEmail}
+                      onPointerEnter={() => playSound("boop", 0.1)}
+                      title="Copy email to clipboard"
+                      variant="ghost"
+                    >
+                      <PixelIcon source={copiedEmail ? checkIcon : copyIcon} />
+                      {copiedEmail ? "Copied!" : "Copy"}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="pixel-card attribution-banner-card">
+            <div>
+              <div className="card-title">Portfolio Credits & Attributions</div>
+              <div className="card-copy">
+                Explore the Golden Sun soundtrack links, 8bitcn UI primitives, Google Fonts, CraftPix backgrounds, and Ambroggio sound effects.
+              </div>
+            </div>
+            <Button
+              className="attribution-banner-btn"
+              onClick={() => {
+                setActiveTab("attributions");
+                playSound("ding", 0.2);
+              }}
+              onPointerEnter={() => playSound("boop", 0.1)}
+              variant="default"
+            >
+              <PixelIcon source={heartIcon} />
+              View All Attributions
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="pixel-card attribution-intro-card">
+            <div className="card-topline">
+              <span className="status-badge">Credits</span>
+              <span className="roadmap-detail">Heritage & Open Source</span>
+            </div>
+            <div className="card-title">Acknowledgments & Attributions</div>
+            <div className="card-copy">
+              Honoring the classic games, sound artists, font designers, and open-source packages that power this 16-bit retro experience.
+            </div>
+          </div>
+
+          <div className="attribution-group">
+            <div className="attribution-group-header">
+              <div className="attribution-group-title">
+                <PixelIcon source={musicIcon} />
+                <span>Realm Background Music — Golden Sun & The Lost Age</span>
+              </div>
+              <div className="attribution-group-subtitle">
+                Composed by Motoi Sakuraba · © Camelot Software Planning / Nintendo
+              </div>
+              <div className="attribution-group-desc">
+                <span>Soundtrack catalog and internal Battle Mode player reference:</span>
+                <Button
+                  className="inline-credit-link"
+                  onClick={() => openExternal("https://goldensunwiki.net/wiki/Music")}
+                  onPointerEnter={() => playSound("boop", 0.1)}
+                  variant="ghost"
+                >
+                  <PixelIcon source={externalLinkIcon} />
+                  Golden Sun Wiki Music Page
+                </Button>
+              </div>
+            </div>
+
+            <div className="attribution-music-grid">
+              {realmCategories.map((category) => {
+                const track = realmMusicTracks[category.id];
+                return (
+                  <div className="pixel-card attribution-music-card" key={category.id}>
+                    <div className="music-card-header">
+                      <span className={`status-badge music-category-badge theme-${category.id}`}>
+                        {category.label}
+                      </span>
+                      <span className="music-badge-pill">{track.badgeLabel}</span>
+                    </div>
+                    <div className="music-card-title">{track.title}</div>
+                    <div className="music-card-game">
+                      {track.game === "GS" ? "Golden Sun (GS)" : "The Lost Age (TLA)"}
+                    </div>
+                    <Button
+                      className="music-listen-btn"
+                      onClick={() => openExternal(track.youtubeUrl)}
+                      onPointerEnter={() => playSound("boop", 0.1)}
+                      variant="ghost"
+                    >
+                      <PixelIcon source={externalLinkIcon} />
+                      Listen on YouTube
+                    </Button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="attribution-group">
+            <div className="attribution-group-header">
+              <div className="attribution-group-title">
+                <PixelIcon source={imageIcon} />
+                <span>Art, Typography, UI Primitives & Audio</span>
+              </div>
+              <div className="attribution-group-subtitle">
+                Digital assets and open-source frameworks powering the portfolio
+              </div>
+            </div>
+
+            <div className="attribution-grid">
+              {generalAttributions.map((resource) => (
+                <div className="pixel-card attribution-card" key={resource.title}>
+                  <div>
+                    <div className="card-topline">
+                      <span className="status-badge">{resource.category}</span>
+                      <span className="roadmap-detail">{resource.author}</span>
+                    </div>
+                    <div className="card-title">{resource.title}</div>
+                    <div className="card-copy">{resource.description}</div>
+                  </div>
+
+                  <div className="attribution-card-actions">
+                    <Button
+                      className="attribution-btn"
+                      onClick={() => openExternal(resource.primaryUrl)}
+                      onPointerEnter={() => playSound("boop", 0.1)}
+                      variant="ghost"
+                    >
+                      <PixelIcon source={externalLinkIcon} />
+                      {resource.primaryLabel}
+                    </Button>
+
+                    {resource.secondaryUrl && (
+                      <Button
+                        className="attribution-btn"
+                        onClick={() => openExternal(resource.secondaryUrl)}
+                        onPointerEnter={() => playSound("boop", 0.1)}
+                        variant="ghost"
+                      >
+                        <PixelIcon source={externalLinkIcon} />
+                        {resource.secondaryLabel}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="contact-switch-footer">
+            <Button
+              onClick={() => {
+                setActiveTab("contact");
+                playSound("ding", 0.2);
+              }}
+              onPointerEnter={() => playSound("boop", 0.1)}
+              variant="default"
+            >
+              <PixelIcon source={mailIcon} />
+              ← Back to Contact Transmissions
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

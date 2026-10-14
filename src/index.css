@@ -670,7 +670,7 @@ li,
 
 .realm-controls {
   position: absolute;
-  z-index: 20;
+  z-index: 40;
   top: clamp(1.5rem, 4vh, 3rem);
   left: clamp(1.5rem, 4vw, 4rem);
 }
@@ -839,7 +839,7 @@ li,
 .crt-scanlines {
   display: none;
   position: absolute;
-  z-index: 50;
+  z-index: 10;
   inset: 0;
   pointer-events: none;
   background:
@@ -933,11 +933,56 @@ li,
   margin-bottom: 1.15rem;
 }
 
+.popover-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.popover-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
 .popover-title {
   color: var(--realm-bright);
   font-size: 1.55rem;
   font-weight: 700;
   letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.popover-music-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  color: var(--realm-bright);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1;
+  background: color-mix(in oklch, var(--realm-accent) 18%, transparent);
+  border: 0.125rem solid color-mix(in oklch, var(--realm-accent) 55%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--realm-bright) 10%, transparent),
+    0 2px 4px oklch(0% 0 0 / 25%);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.popover-music-badge .music-badge-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--realm-accent);
+  flex-shrink: 0;
+}
+
+.popover-music-badge .music-badge-text {
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .popover-subtitle {
@@ -1084,7 +1129,7 @@ li,
 
 .section-shell {
   position: absolute;
-  z-index: 5;
+  z-index: 30;
   inset: 0;
   background:
     linear-gradient(180deg, oklch(6% 0.025 200 / 72%), oklch(6% 0.025 200 / 92%)),
@@ -1101,7 +1146,7 @@ li,
 
 .section-back {
   position: absolute;
-  z-index: 8;
+  z-index: 35;
   top: clamp(1.5rem, 4vh, 3rem);
   right: clamp(1.5rem, 4vw, 4rem);
   gap: 0.55rem;
@@ -2605,6 +2650,317 @@ li,
   background: var(--realm-bright);
 }
 
+/* Contact & Attributions section styles */
+.contact-tab-toggle {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: 0.25rem;
+  margin-left: auto;
+  padding: 0.25rem;
+  background: color-mix(in oklch, var(--realm-panel-deep) 90%, transparent);
+  border: 0.125rem solid color-mix(in oklch, var(--realm-accent) 55%, transparent);
+  box-shadow: 0 0.25rem 0.75rem oklch(0% 0 0 / 25%);
+}
+
+.contact-tab-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.2rem;
+  padding: 0.25rem 0.85rem;
+  color: var(--mist-muted);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.15s ease, background 0.15s ease;
+  cursor: pointer;
+}
+
+.contact-tab-button .pixel-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+}
+
+.contact-tab-button:hover:not(.bit-button-default) {
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 18%, transparent);
+}
+
+.contact-tab-button.bit-button-default {
+  color: var(--realm-dark);
+  background: var(--realm-bright);
+  font-weight: 700;
+}
+
+.contact-tab-button .bit-edge,
+.contact-tab-button .bit-corner {
+  display: none;
+}
+
+.contact-availability-card {
+  margin-bottom: 1.5rem;
+  padding: 1.35rem;
+}
+
+.contact-location {
+  color: var(--realm-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.15rem;
+  padding: 1.35rem;
+}
+
+.contact-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 18%, transparent);
+  border: 0.125rem solid var(--realm-accent);
+}
+
+.contact-card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+.contact-action-btn {
+  flex: 1;
+  min-height: 2.35rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.contact-copy-btn {
+  min-height: 2.35rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  gap: 0.45rem;
+  color: var(--realm-bright);
+  border: 0.125rem solid color-mix(in oklch, var(--realm-accent) 55%, transparent);
+  background: color-mix(in oklch, var(--realm-panel-deep) 60%, transparent);
+}
+
+.contact-copy-btn:hover {
+  background: color-mix(in oklch, var(--realm-accent) 22%, transparent);
+}
+
+.attribution-banner-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.35rem;
+  flex-wrap: wrap;
+  padding: 1.4rem;
+}
+
+.attribution-banner-btn {
+  min-height: 2.5rem;
+  padding: 0.4rem 1rem;
+  gap: 0.5rem;
+}
+
+.attribution-intro-card {
+  margin-bottom: 1.5rem;
+  padding: 1.35rem;
+}
+
+.attribution-group {
+  margin-bottom: 2.25rem;
+}
+
+.attribution-group-header {
+  margin-bottom: 1.15rem;
+}
+
+.attribution-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--realm-bright);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.attribution-group-subtitle {
+  margin-top: 0.25rem;
+  color: var(--realm-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.attribution-group-desc {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.45rem;
+  color: var(--mist-muted);
+  font-size: 0.85rem;
+}
+
+.inline-credit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.75rem;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 18%, transparent);
+  border: 0.125rem solid color-mix(in oklch, var(--realm-accent) 60%, transparent);
+}
+
+.inline-credit-link:hover {
+  background: color-mix(in oklch, var(--realm-accent) 32%, transparent);
+}
+
+.attribution-music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
+  gap: 0.85rem;
+}
+
+.attribution-music-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1rem 1.15rem;
+}
+
+.music-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.music-category-badge {
+  font-size: 0.65rem;
+  min-height: 1.35rem;
+  padding: 0.1rem 0.45rem;
+}
+
+.music-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 22%, transparent);
+  border: 1px solid color-mix(in oklch, var(--realm-accent) 55%, transparent);
+}
+
+.music-card-title {
+  color: var(--realm-bright);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.music-card-game {
+  color: var(--mist-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.music-listen-btn {
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.15rem;
+  margin-top: auto;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 14%, transparent);
+  border: 0.125rem solid color-mix(in oklch, var(--realm-accent) 50%, transparent);
+}
+
+.music-listen-btn:hover {
+  background: color-mix(in oklch, var(--realm-accent) 28%, transparent);
+}
+
+.attribution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+}
+
+.attribution-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding: 1.35rem;
+}
+
+.attribution-card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.6rem;
+}
+
+.attribution-btn {
+  gap: 0.45rem;
+  min-height: 2.15rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  color: var(--realm-bright);
+  background: color-mix(in oklch, var(--realm-accent) 14%, transparent);
+  border: 0.125rem solid color-mix(in oklch, var(--realm-accent) 50%, transparent);
+}
+
+.attribution-btn:hover {
+  background: color-mix(in oklch, var(--realm-accent) 28%, transparent);
+}
+
+.contact-switch-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 @keyframes breaker-ball {
   0% {
     bottom: 3rem;
@@ -2769,6 +3125,20 @@ li,
 
   .popover-subtitle {
     max-width: 17rem;
+  }
+
+  .popover-title-row {
+    gap: 0.45rem;
+  }
+
+  .popover-music-badge {
+    padding: 0.15rem 0.45rem;
+    font-size: 0.85rem;
+  }
+
+  .popover-music-badge .music-badge-icon {
+    width: 0.75rem;
+    height: 0.75rem;
   }
 
   .section-scroll {
@@ -2974,6 +3344,36 @@ li,
 
   .equipment-items {
     justify-content: flex-start;
+  }
+
+  .contact-grid,
+  .attribution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attribution-music-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attribution-banner-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .attribution-banner-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-action-btn,
+  .contact-copy-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

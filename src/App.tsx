@@ -7,6 +7,7 @@ import mailIcon from "pixelarticons/svg/mail.svg?url";
 
 import {
   AboutSection,
+  ContactSection,
   ExperienceSection,
   NotFoundSection,
   ProjectsSection,
@@ -18,7 +19,8 @@ import { PortfolioTutorial } from "./components/portfolio-tutorial";
 import { RealmSwitcher } from "./components/realm-switcher";
 import { Button } from "./components/ui/8bit-button";
 import { PixelIcon } from "./components/ui/pixel-icon";
-import { realms } from "./data/realms";
+import { realms, type RealmCategoryId } from "./data/realms";
+import { useBackgroundMusic } from "./hooks/use-background-music";
 import { useUiSounds } from "./hooks/use-ui-sounds";
 import { initializeAnalytics, trackPageView } from "./lib/analytics";
 import { Analytics } from "@vercel/analytics/react";
@@ -49,6 +51,11 @@ const menuItems = [
     id: "projects",
     label: "Projects",
     description: "Selected builds",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    description: "Channels & credits",
   },
 ] as const satisfies ReadonlyArray<{
   id: PortfolioSectionId;
@@ -87,6 +94,7 @@ export default function App() {
     getRouteFromHash,
   );
   const [activeRealm, setActiveRealm] = useState(initialRealm);
+  const [previewCategory, setPreviewCategory] = useState<RealmCategoryId | null>(null);
   const [isTutorialActive, setIsTutorialActive] = useState(false);
   const [tutorialCheckpoint, setTutorialCheckpoint] = useState<number | null>(null);
   const [isCrtEnabled, setIsCrtEnabled] = useState(
@@ -98,6 +106,12 @@ export default function App() {
   });
   const menuRef = useRef<HTMLElement>(null);
   const { isMuted, playSound, toggleMuted } = useUiSounds();
+
+  const effectiveCategory = previewCategory ?? activeRealm.category;
+  useBackgroundMusic({
+    category: effectiveCategory,
+    isMuted,
+  });
 
   const selectItem = useCallback((index: number) => {
     setSelectedIndex(index);
@@ -230,6 +244,8 @@ export default function App() {
         return <ExperienceSection playSound={playSound} />;
       case "projects":
         return <ProjectsSection playSound={playSound} />;
+      case "contact":
+        return <ContactSection playSound={playSound} />;
       case "404":
         return <NotFoundSection onHome={returnHome} playSound={playSound} />;
       default:
@@ -264,6 +280,7 @@ export default function App() {
         activeRealm={activeRealm}
         isCrtEnabled={isCrtEnabled}
         isMuted={isMuted}
+        onPreviewCategoryChange={setPreviewCategory}
         onRealmChange={setActiveRealm}
         onToggleCrt={() => setIsCrtEnabled((current) => !current)}
         onToggleMuted={toggleMuted}
