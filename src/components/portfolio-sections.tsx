@@ -1,52 +1,55 @@
-import { useState, type CSSProperties, type ReactNode } from "react";
-import bookIcon from "pixelarticons/svg/book-open.svg?url";
-import bracesIcon from "pixelarticons/svg/braces.svg?url";
-import briefcaseIcon from "pixelarticons/svg/briefcase.svg?url";
-import cloudServerIcon from "pixelarticons/svg/cloud-server.svg?url";
-import codeIcon from "pixelarticons/svg/code.svg?url";
-import cpuIcon from "pixelarticons/svg/cpu.svg?url";
-import databaseIcon from "pixelarticons/svg/database.svg?url";
-import externalLinkIcon from "pixelarticons/svg/external-link.svg?url";
-import gitBranchIcon from "pixelarticons/svg/git-branch.svg?url";
-import githubIcon from "pixelarticons/svg/github.svg?url";
-import globeIcon from "pixelarticons/svg/globe.svg?url";
-import homeIcon from "pixelarticons/svg/home.svg?url";
-import keyIcon from "pixelarticons/svg/key.svg?url";
-import laptopIcon from "pixelarticons/svg/laptop.svg?url";
-import lockIcon from "pixelarticons/svg/lock.svg?url";
-import packageIcon from "pixelarticons/svg/package.svg?url";
-import reactIcon from "pixelarticons/svg/react.svg?url";
-import serverIcon from "pixelarticons/svg/server.svg?url";
-import shieldIcon from "pixelarticons/svg/shield.svg?url";
-import testTubeIcon from "pixelarticons/svg/test-tube.svg?url";
-import trophyIcon from "pixelarticons/svg/trophy.svg?url";
-import userIcon from "pixelarticons/svg/user.svg?url";
-import windIcon from "pixelarticons/svg/wind.svg?url";
-import zapIcon from "pixelarticons/svg/zap.svg?url";
-import checkIcon from "pixelarticons/svg/check.svg?url";
-import contactIcon from "pixelarticons/svg/contact.svg?url";
-import copyIcon from "pixelarticons/svg/copy.svg?url";
-import fileTextIcon from "pixelarticons/svg/file-text.svg?url";
-import heartIcon from "pixelarticons/svg/heart.svg?url";
-import imageIcon from "pixelarticons/svg/image.svg?url";
-import linkedinIcon from "pixelarticons/svg/linkedin.svg?url";
-import mailIcon from "pixelarticons/svg/mail.svg?url";
-import musicIcon from "pixelarticons/svg/music.svg?url";
+import { useState, type CSSProperties, type ReactNode } from "react"
+import bookIcon from "pixelarticons/svg/book-open.svg?url"
+import bracesIcon from "pixelarticons/svg/braces.svg?url"
+import briefcaseIcon from "pixelarticons/svg/briefcase.svg?url"
+import cloudServerIcon from "pixelarticons/svg/cloud-server.svg?url"
+import codeIcon from "pixelarticons/svg/code.svg?url"
+import cpuIcon from "pixelarticons/svg/cpu.svg?url"
+import databaseIcon from "pixelarticons/svg/database.svg?url"
+import externalLinkIcon from "pixelarticons/svg/external-link.svg?url"
+import gitBranchIcon from "pixelarticons/svg/git-branch.svg?url"
+import githubIcon from "pixelarticons/svg/github.svg?url"
+import globeIcon from "pixelarticons/svg/globe.svg?url"
+import homeIcon from "pixelarticons/svg/home.svg?url"
+import keyIcon from "pixelarticons/svg/key.svg?url"
+import laptopIcon from "pixelarticons/svg/laptop.svg?url"
+import lockIcon from "pixelarticons/svg/lock.svg?url"
+import packageIcon from "pixelarticons/svg/package.svg?url"
+import reactIcon from "pixelarticons/svg/react.svg?url"
+import serverIcon from "pixelarticons/svg/server.svg?url"
+import shieldIcon from "pixelarticons/svg/shield.svg?url"
+import testTubeIcon from "pixelarticons/svg/test-tube.svg?url"
+import trophyIcon from "pixelarticons/svg/trophy.svg?url"
+import userIcon from "pixelarticons/svg/user.svg?url"
+import windIcon from "pixelarticons/svg/wind.svg?url"
+import zapIcon from "pixelarticons/svg/zap.svg?url"
+import checkIcon from "pixelarticons/svg/check.svg?url"
+import contactIcon from "pixelarticons/svg/contact.svg?url"
+import copyIcon from "pixelarticons/svg/copy.svg?url"
+import fileTextIcon from "pixelarticons/svg/file-text.svg?url"
+import heartIcon from "pixelarticons/svg/heart.svg?url"
+import imageIcon from "pixelarticons/svg/image.svg?url"
+import linkedinIcon from "pixelarticons/svg/linkedin.svg?url"
+import mailIcon from "pixelarticons/svg/mail.svg?url"
+import musicIcon from "pixelarticons/svg/music.svg?url"
+import chartLineIcon from "pixelarticons/svg/chart-line.svg?url"
+import dockerIcon from "pixelarticons/svg/docker.svg?url"
+import speedFastIcon from "pixelarticons/svg/speed-fast.svg?url"
 
-import { realmMusicTracks } from "../data/realm-music";
-import { realmCategories } from "../data/realms";
-import type { UiSound } from "../hooks/use-ui-sounds";
-import { Button } from "./ui/8bit-button";
-import { PixelIcon } from "./ui/pixel-icon";
+import { realmMusicTracks } from "../data/realm-music"
+import { realmCategories } from "../data/realms"
+import type { UiSound } from "../hooks/use-ui-sounds"
+import { Button } from "./ui/8bit-button"
+import { PixelIcon } from "./ui/pixel-icon"
 
-export type PortfolioSectionId = "start" | "about" | "skills" | "experience" | "projects" | "contact";
+export type PortfolioSectionId = "start" | "about" | "skills" | "experience" | "projects" | "contact"
 
 interface SectionProps {
-  playSound: (sound: UiSound, volume?: number) => void;
+  playSound: (sound: UiSound, volume?: number) => void
 }
 
 interface StartSectionProps extends SectionProps {
-  onStartTutorial: () => void;
+  onStartTutorial: () => void
 }
 
 const professionalConversations = [
@@ -70,7 +73,7 @@ const professionalConversations = [
     answer:
       "Outside of work, I focus on street photography, game development experiments, video games, and reading novels and manga.",
   },
-];
+]
 
 const catConversations = [
   {
@@ -94,9 +97,10 @@ const catConversations = [
   {
     question:
       "[Tucks paws in for a nap.] When you are not staring at glowing glass, what are you doing with your paws?",
-    answer: "I take street photos, build small game prototypes, play video games, and read manga.",
+    answer:
+      "I take street photos, build small game prototypes, play video games, and read manga.",
   },
-];
+]
 
 const education = [
   {
@@ -120,50 +124,38 @@ const education = [
     school: "Jalaram Academy · Kisumu, Kenya",
     detail: "Completed",
   },
-];
+]
 
 const experienceMilestones = [
   {
     marker: "2025",
-    title: "Fullstack Developer Intern",
+    title: "Fullstack Developer Intern (Part-time to Full-time)",
     period: "March 2025 – July 2026",
     company: "Ioncure Tech Pvt. Ltd. · Remote",
     points: [
       {
-        title: "Conference Platform",
+        title: "Multi-Tenant Conference Platform",
         metric: "20+ events",
         description:
-          "Built a multi-tenant platform with Next.js, TypeScript, and MySQL. Dynamic templates cut conference-track setup from four hours to ten minutes while maintaining 98+ Lighthouse scores.",
+          "Built a multi-tenant conference platform using Next.js, TypeScript, and MySQL across 20+ events; implemented dynamic page templates that reduced new conference-track setup from 4 hours to 10 minutes while maintaining 98+ Lighthouse scores.",
       },
       {
-        title: "Payment Infrastructure",
-        metric: "$50K+ processed",
+        title: "Dual-Gateway Payment Pipelines",
+        metric: "Zero duplicates",
         description:
-          "Integrated Razorpay and PayPal with webhook signature verification and idempotent event handling across seven months of multi-currency transactions.",
+          "Engineered dual-gateway payment pipelines with Razorpay and PayPal in Next.js; implemented HMAC webhook verification and idempotent transaction handling to prevent duplicate ticket allocations across multi-currency checkouts.",
       },
       {
-        title: "Access & Data Security",
+        title: "Role-Based Access Control",
         metric: "1,000+ users",
         description:
-          "Implemented tenant-scoped RBAC for organizers, speakers, and attendees, secured sessions with httpOnly cookies, and encrypted sensitive attendee data at rest.",
+          "Implemented role-based access control for organizers, speakers, and attendees through API middleware with tenant-scoped database queries for 1,000+ users; secured sessions with httpOnly cookies and encrypted sensitive attendee data at rest.",
       },
       {
-        title: "Production Delivery",
-        metric: "5 websites",
+        title: "Conference Discovery Portals",
+        metric: "20+ schedules",
         description:
-          "Shipped production websites with Next.js and Tailwind CSS using a shared component library while incorporating client feedback into scoped development tasks.",
-      },
-      {
-        title: "AI Workflow Automation",
-        metric: "Under 1 min / CV",
-        description:
-          "Used a chatbot, Zapier, and the OpenAI API to convert 100–200 applicants per hiring cycle into structured records, down from roughly five minutes per CV.",
-      },
-      {
-        title: "Team Enablement",
-        metric: "12 onboarded",
-        description:
-          "Documented the team’s Git workflow and development tooling and onboarded incoming interns and teammates.",
+          "Built responsive conference discovery and registration portals using Next.js, React, and Radix UI with React Hook Form and Zod validation; implemented debounced search and URL-synchronized multi-criteria filters across 20+ event schedules.",
       },
     ],
   },
@@ -206,20 +198,21 @@ const experienceMilestones = [
       },
     ],
   },
-];
+]
 
 const languageSkills = [
   { label: "TypeScript", icon: codeIcon, duration: "24s", delay: "-3s" },
   { label: "JavaScript", icon: bracesIcon, duration: "30s", delay: "-11s" },
   { label: "SQL", icon: databaseIcon, duration: "38s", delay: "-19s" },
-];
+]
 
 const frontendSkills = [
-  { label: "React", icon: bracesIcon },
+  { label: "React", icon: reactIcon },
   { label: "Next.js", icon: globeIcon },
   { label: "Tailwind CSS", icon: windIcon },
   { label: "Electron", icon: laptopIcon },
-];
+  { label: "Radix UI & Zod", icon: packageIcon },
+]
 
 const backendSkills = [
   { label: "Node.js", icon: serverIcon },
@@ -228,33 +221,100 @@ const backendSkills = [
   { label: "PostgreSQL", icon: databaseIcon },
   { label: "SQLite", icon: packageIcon },
   { label: "Supabase", icon: cloudServerIcon },
-];
+]
 
 const securitySkills = [
   { label: "RBAC", icon: shieldIcon },
   { label: "OAuth 2.0 (PKCE)", icon: keyIcon },
   { label: "RSA", icon: lockIcon },
   { label: "Webhook verification", icon: cloudServerIcon },
-];
+]
 
-const toolingSkills = [
-  { label: "Git", icon: gitBranchIcon },
+const devopsSkills = [
+  { label: "Docker", icon: dockerIcon },
+  { label: "Kubernetes (k3s)", icon: cloudServerIcon },
+  { label: "Helm & Terraform", icon: packageIcon },
   { label: "GitHub Actions", icon: githubIcon },
+  { label: "Git", icon: gitBranchIcon },
+]
+
+const testingSkills = [
   { label: "Vitest", icon: testTubeIcon },
+  { label: "k6 Load Testing", icon: speedFastIcon },
+  { label: "Prometheus & Grafana", icon: chartLineIcon },
+]
+
+const automationSkills = [
   { label: "OpenAI API", icon: cpuIcon },
   { label: "Zapier", icon: zapIcon },
-];
+]
 
 const projects = [
+  {
+    name: "SynapseState",
+    subtitle: "Node.js · PostgreSQL · k3s · Vitest · k6",
+    github: "https://github.com/adityapawar112/SynapseState",
+    live: "https://github.com/adityapawar112/SynapseState/releases",
+    features: [
+      "Provisioned containerized infrastructure on k3s using Terraform and Helm to deploy the Node.js control plane and PostgreSQL; configured automated database migrations, remote state locking, and non-root container deployments.",
+      "Built multi-stage CI/CD pipelines in GitHub Actions with Docker Buildx and Trivy vulnerability scans; automated multi-package test runs with PostgreSQL 16 service containers and published versioned images to GitHub Container Registry (GHCR).",
+      "Engineered k6 load-testing suites and Prometheus monitoring to benchmark in-memory flag lookups and stress-test state synchronization across 100 concurrent workers; verified cluster-wide lease propagation under 0.5 s with zero dropped requests.",
+      "Wrote Vitest integration and conformance test suites validating cryptographic signature verification, payload canonicalization, and expiry boundaries; tested local file fallbacks to maintain overrides during network partitions and automated PR promotion.",
+    ],
+    technologies: [
+      { label: "Node.js", icon: serverIcon },
+      { label: "TypeScript", icon: codeIcon },
+      { label: "PostgreSQL", icon: databaseIcon },
+      { label: "Docker", icon: dockerIcon },
+      { label: "k3s", icon: cloudServerIcon },
+      { label: "Vitest", icon: testTubeIcon },
+      { label: "k6", icon: speedFastIcon },
+      { label: "Prometheus", icon: chartLineIcon },
+    ],
+    media: [
+      {
+        src: "/projects/synapsestate/control-plane-architecture.webp",
+        alt: "SynapseState control plane and in-process state delivery architecture",
+      },
+      {
+        src: "/projects/synapsestate/k6-load-benchmark.webp",
+        alt: "k6 load testing telemetry: 100 concurrent workers, sub-0.5s propagation, 0 dropped requests",
+      },
+      {
+        src: "/projects/synapsestate/k3s-cluster-deployment.webp",
+        alt: "k3s containerized cluster pods, Helm charts, and Prometheus metrics",
+      },
+      {
+        src: "/projects/synapsestate/demo-shop-evaluation.webp",
+        alt: "Live OpenFeature flag evaluation and in-process targeting engine in demo-shop",
+      },
+      {
+        src: "/projects/synapsestate/vitest-crypto-coverage.webp",
+        alt: "Vitest test runner and V8 code coverage: 20 test files passed, 199 tests, 99.4% coverage",
+      },
+      {
+        src: "/projects/synapsestate/github-actions-cicd.webp",
+        alt: "GitHub Actions CI/CD matrix: multi-arch Docker Buildx, Trivy scans, and GHCR publishing",
+      },
+      {
+        src: "/projects/synapsestate/openfeature-provider-lifecycle.webp",
+        alt: "OpenFeature custom OverrideProvider evaluation lifecycle and 99ns hot-path resolution",
+      },
+      {
+        src: "/projects/synapsestate/postgres-schema-state-machine.webp",
+        alt: "PostgreSQL 16 relational model, atomic leases, and SHA-256 hash-chained audit ledger",
+      },
+    ],
+  },
   {
     name: "ScaleERP-Desktop",
     subtitle: "Electron · React · SQLite",
     github: "https://github.com/adityapawar112/ScaleERP-Desktop",
     live: "https://scale-erp.vercel.app/",
     features: [
-      "Built an offline-first inventory and billing desktop app with a 28-table schema, ledger-reversal safeguards, and indexed/FTS5 search under 50 ms across 10,000+ items.",
-      "Implemented RSA-signed offline license verification with a 30-day grace period, local heartbeat checks, clock-rollback detection, and database-tampering safeguards.",
-      "Built Google Drive backup and restore with OAuth 2.0 PKCE, encrypted token storage, exponential-backoff retries, and SHA-256-verified SQLite snapshots.",
+      "Built an offline-first inventory and billing desktop app with Electron, React, and SQLite; designed a 28-table schema with ledger-reversal safeguards and implemented FTS5 indexing for sub-millisecond local search across 10,000+ items.",
+      "Secured desktop IPC boundaries using Electron context bridges and typed channels, isolating the React UI from direct OS calls and validating all SQLite queries inside the main process.",
+      "Implemented Google Drive backup and restore with OAuth 2.0 PKCE, encrypted token storage, a durable upload queue with exponential-backoff retries, and SHA-256-verified SQLite snapshots for reliable recovery.",
       "Added GitHub Actions CI with Vitest, secret scanning, and build-safety checks before packaging Windows NSIS installers and portable releases.",
     ],
     technologies: [
@@ -266,12 +326,30 @@ const projects = [
       { label: "Bootstrap", icon: packageIcon },
     ],
     media: [
-      { src: "/projects/scalerp-desktop/whatsapp-manager.webp", alt: "ScaleERP WhatsApp manager" },
-      { src: "/projects/scalerp-desktop/add-transaction.webp", alt: "ScaleERP add transaction form" },
-      { src: "/projects/scalerp-desktop/custom-bills.webp", alt: "ScaleERP custom invoice settings" },
-      { src: "/projects/scalerp-desktop/invoice-preview.webp", alt: "ScaleERP supplier invoice preview" },
-      { src: "/projects/scalerp-desktop/marathi-dashboard.webp", alt: "ScaleERP dashboard in Marathi" },
-      { src: "/projects/scalerp-desktop/reports-analysis.webp", alt: "ScaleERP reports and analysis" },
+      {
+        src: "/projects/scalerp-desktop/whatsapp-manager.webp",
+        alt: "ScaleERP WhatsApp manager",
+      },
+      {
+        src: "/projects/scalerp-desktop/add-transaction.webp",
+        alt: "ScaleERP add transaction form",
+      },
+      {
+        src: "/projects/scalerp-desktop/custom-bills.webp",
+        alt: "ScaleERP custom invoice settings",
+      },
+      {
+        src: "/projects/scalerp-desktop/invoice-preview.webp",
+        alt: "ScaleERP supplier invoice preview",
+      },
+      {
+        src: "/projects/scalerp-desktop/marathi-dashboard.webp",
+        alt: "ScaleERP dashboard in Marathi",
+      },
+      {
+        src: "/projects/scalerp-desktop/reports-analysis.webp",
+        alt: "ScaleERP reports and analysis",
+      },
     ],
   },
   {
@@ -280,9 +358,9 @@ const projects = [
     github: "https://github.com/adityapawar112/ScaleERP-Web",
     live: "https://scale-erp.vercel.app/",
     features: [
-      "Built a cloud control plane for trials and licenses with Next.js and Supabase, generating RSA-2048 signed keys tied to hardware fingerprints with an air-gapped signing tool.",
-      "Hardened REST APIs with schema validation, structured errors, rate limiting, device-quota enforcement, and security audit logging.",
-      "Handled client heartbeat ingestion to record workstation telemetry, audit active device allocations, and flag clock-skew anomalies.",
+      "Built the Next.js 15 cloud portal and licensing control plane connected to Supabase PostgreSQL; implemented RSA-signed offline key verification with a 30-day grace period, device quotas, and interactive pricing with i18n localization.",
+      "Hardened REST APIs with schema validation, structured error responses, rate limiting, device-quota enforcement, and security audit logging.",
+      "Handled client heartbeat ingestion to record workstation telemetry, audit active device allocations, and detect clock-rollback anomalies.",
       "Configured release delivery through GitHub Releases, automated Vercel deployments, and documentation in English, Hindi, and Marathi.",
     ],
     technologies: [
@@ -294,68 +372,85 @@ const projects = [
       { label: "Tailwind CSS", icon: windIcon },
     ],
     media: [
-      { src: "/projects/scalerp-web/landing-scalererp-web.webp", alt: "ScaleERP website landing page" },
-      { src: "/projects/scalerp-web/features-scalererp-web.webp", alt: "ScaleERP website platform page" },
+      {
+        src: "/projects/scalerp-web/landing-scalererp-web.webp",
+        alt: "ScaleERP website landing page",
+      },
+      {
+        src: "/projects/scalerp-web/features-scalererp-web.webp",
+        alt: "ScaleERP website platform page",
+      },
     ],
   },
-];
+]
 
 function SectionHeading({
   action,
+  className,
   description,
   icon,
   title,
   tutorialTarget,
 }: {
-  action?: ReactNode;
-  description: string;
-  icon: string;
-  title: string;
-  tutorialTarget?: string;
+  action?: ReactNode
+  className?: string
+  description: string
+  icon: string
+  title: string
+  tutorialTarget?: string
 }) {
   return (
-    <div className="section-heading" data-tutorial-target={tutorialTarget}>
+    <div
+      className={`section-heading${action ? " section-heading-with-action" : ""}${className ? ` ${className}` : ""}`}
+      data-tutorial-target={tutorialTarget}
+    >
       <PixelIcon className="section-heading-icon" source={icon} />
-      <div>
+      <div className="section-heading-text">
         <div aria-level={2} className="section-title" role="heading">
           {title}
         </div>
         <div className="section-description">{description}</div>
       </div>
-      {action}
+      {action && <div className="section-heading-action">{action}</div>}
     </div>
-  );
+  )
 }
 
 export function AboutSection({ playSound }: SectionProps) {
-  const [mode, setMode] = useState<"professional" | "cat">("professional");
-  const isCatMode = mode === "cat";
-  const conversations = isCatMode ? catConversations : professionalConversations;
+  const [mode, setMode] = useState<"professional" | "cat">("professional")
+  const isCatMode = mode === "cat"
+  const conversations = isCatMode ? catConversations : professionalConversations
 
   const selectMode = (nextMode: "professional" | "cat") => {
-    if (nextMode === mode) return;
-    setMode(nextMode);
-    playSound("ding", 0.2);
-  };
+    if (nextMode === mode) return
+    setMode(nextMode)
+    playSound("ding", 0.2)
+  }
 
   return (
     <div className="content-section">
       <SectionHeading
+        className="about-section-heading"
         action={
-          <div aria-label="About conversation mode" className="about-mode-toggle" role="group">
+          <div
+            aria-label="About conversation mode"
+            className="about-mode-toggle"
+            role="group"
+          >
             <Button
-              aria-label="Use professional mode"
+              aria-label="Use HR mode"
               aria-pressed={!isCatMode}
               className="about-mode-button"
               onClick={() => selectMode("professional")}
               onPointerEnter={() => playSound("boop", 0.1)}
-              title="Professional mode"
+              title="HR mode"
               variant={!isCatMode ? "default" : "ghost"}
             >
               <PixelIcon source={briefcaseIcon} />
+              <span>HR</span>
             </Button>
             <Button
-              aria-label="Use cat mode"
+              aria-label="Use Cat mode"
               aria-pressed={isCatMode}
               className="about-mode-button"
               onClick={() => selectMode("cat")}
@@ -367,6 +462,7 @@ export function AboutSection({ playSound }: SectionProps) {
                 <span />
                 <span />
               </span>
+              <span>Cat</span>
             </Button>
           </div>
         }
@@ -384,7 +480,11 @@ export function AboutSection({ playSound }: SectionProps) {
           <div className="dialogue-exchange" key={exchange.question}>
             <div className="dialogue-row">
               {isCatMode ? (
-                <div aria-label="Byte the pixel cat" className="pixel-cat" role="img">
+                <div
+                  aria-label="Byte the pixel cat"
+                  className="pixel-cat"
+                  role="img"
+                >
                   <span className="cat-ear cat-ear-left" />
                   <span className="cat-ear cat-ear-right" />
                   <span className="cat-eye cat-eye-left" />
@@ -392,18 +492,28 @@ export function AboutSection({ playSound }: SectionProps) {
                   <span className="cat-nose" />
                 </div>
               ) : (
-                <div aria-label="Recruiter" className="human-avatar recruiter-avatar" role="img">
+                <div
+                  aria-label="Recruiter"
+                  className="human-avatar recruiter-avatar"
+                  role="img"
+                >
                   HR
                 </div>
               )}
               <div className="dialogue-box">
-                <div className="dialogue-speaker">{isCatMode ? "Cat" : "Recruiter"}</div>
+                <div className="dialogue-speaker">
+                  {isCatMode ? "Cat" : "Recruiter"}
+                </div>
                 <div className="dialogue-copy">{exchange.question}</div>
                 <span aria-hidden="true" className="dialogue-next" />
               </div>
             </div>
             <div className="dialogue-row dialogue-row-reverse">
-              <div aria-label="Aditya Pawar" className="human-avatar" role="img">
+              <div
+                aria-label="Aditya Pawar"
+                className="human-avatar"
+                role="img"
+              >
                 AP
               </div>
               <div className="dialogue-box">
@@ -441,10 +551,13 @@ export function AboutSection({ playSound }: SectionProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export function StartSection({ onStartTutorial, playSound }: StartSectionProps) {
+export function StartSection({
+  onStartTutorial,
+  playSound,
+}: StartSectionProps) {
   return (
     <div className="content-section">
       <SectionHeading
@@ -457,52 +570,56 @@ export function StartSection({ onStartTutorial, playSound }: StartSectionProps) 
         <div>
           <div className="card-title">Tutorial ready</div>
           <div className="card-copy">
-            Follow the guide through each menu chapter. You can leave the tutorial at any time.
+            Follow the guide through each menu chapter. You can leave the
+            tutorial at any time.
           </div>
         </div>
         <Button
           className="tutorial-launch-button"
           onClick={() => {
-            playSound("chord", 0.25);
-            onStartTutorial();
+            playSound("chord", 0.25)
+            onStartTutorial()
           }}
         >
           Begin tutorial
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
 function openProjectLink(url: string) {
-  window.open(url, "_blank", "noopener,noreferrer");
+  window.open(url, "_blank", "noopener,noreferrer")
 }
 
 export function ProjectsSection({ playSound }: SectionProps) {
-  const [expandedProject, setExpandedProject] = useState<number | null>(0);
-  const [mediaIndexes, setMediaIndexes] = useState(() => projects.map(() => 0));
+  const [expandedProject, setExpandedProject] = useState<number | null>(0)
+  const [mediaIndexes, setMediaIndexes] = useState(() => projects.map(() => 0))
 
   const moveCarousel = (projectIndex: number, direction: number) => {
     setMediaIndexes((current) =>
       current.map((mediaIndex, index) => {
-        if (index !== projectIndex) return mediaIndex;
-        return (mediaIndex + direction + projects[index].media.length) % projects[index].media.length;
+        if (index !== projectIndex) return mediaIndex
+        return (
+          (mediaIndex + direction + projects[index].media.length) %
+          projects[index].media.length
+        )
       }),
-    );
-    playSound("ding", 0.15);
-  };
+    )
+    playSound("ding", 0.15)
+  }
 
   return (
     <div className="content-section content-section-wide">
       <SectionHeading
-        description="Two connected products built for reliable inventory, billing, and licensing."
+        description="Flagship distributed systems, offline-first desktop software, and cloud licensing engines."
         icon={trophyIcon}
         title="Project Quest Log"
         tutorialTarget="section-projects"
       />
       <div className="project-list">
         {projects.map((project, projectIndex) => {
-          const activeMedia = mediaIndexes[projectIndex];
+          const activeMedia = mediaIndexes[projectIndex]
 
           return (
             <div className="pixel-card project-card" key={project.name}>
@@ -514,8 +631,8 @@ export function ProjectsSection({ playSound }: SectionProps) {
                       aria-label={`Open ${project.name} on GitHub`}
                       className="project-link"
                       onClick={() => {
-                        playSound("chord", 0.3);
-                        openProjectLink(project.github);
+                        playSound("chord", 0.3)
+                        openProjectLink(project.github)
                       }}
                       variant="ghost"
                     >
@@ -526,8 +643,8 @@ export function ProjectsSection({ playSound }: SectionProps) {
                       aria-label={`Open ${project.name} live site`}
                       className="project-link"
                       onClick={() => {
-                        playSound("chord", 0.3);
-                        openProjectLink(project.live);
+                        playSound("chord", 0.3)
+                        openProjectLink(project.live)
                       }}
                     >
                       <PixelIcon source={externalLinkIcon} />
@@ -541,8 +658,8 @@ export function ProjectsSection({ playSound }: SectionProps) {
                   onClick={() => {
                     setExpandedProject((current) =>
                       current === projectIndex ? null : projectIndex,
-                    );
-                    playSound("ding", 0.2);
+                    )
+                    playSound("ding", 0.2)
                   }}
                   variant="ghost"
                 >
@@ -550,10 +667,16 @@ export function ProjectsSection({ playSound }: SectionProps) {
                     <span className="card-title">{project.name}</span>
                   </span>
                   <span className="project-trigger-hint">
-                    <span>{expandedProject === projectIndex ? "Hide details" : "View details"}</span>
+                    <span>
+                      {expandedProject === projectIndex
+                        ? "Hide details"
+                        : "View details"}
+                    </span>
                     <span
                       aria-hidden="true"
-                      className={`quest-chevron${expandedProject === projectIndex ? " is-open" : ""}`}
+                      className={`quest-chevron${
+                        expandedProject === projectIndex ? " is-open" : ""
+                      }`}
                     />
                   </span>
                 </Button>
@@ -621,10 +744,15 @@ export function ProjectsSection({ playSound }: SectionProps) {
                           <span aria-hidden="true">←</span>
                           Previous
                         </Button>
-                        <div className="project-carousel-dots" aria-hidden="true">
+                        <div
+                          className="project-carousel-dots"
+                          aria-hidden="true"
+                        >
                           {project.media.map((media, mediaIndex) => (
                             <span
-                              className={mediaIndex === activeMedia ? "is-active" : ""}
+                              className={
+                                mediaIndex === activeMedia ? "is-active" : ""
+                              }
                               key={media.src}
                             />
                           ))}
@@ -644,28 +772,30 @@ export function ProjectsSection({ playSound }: SectionProps) {
                 </div>
               )}
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
 export function ExperienceSection({ playSound }: SectionProps) {
-  const [expandedRole, setExpandedRole] = useState<number | null>(null);
-  const [expandedPoints, setExpandedPoints] = useState<Set<string>>(() => new Set());
+  const [expandedRole, setExpandedRole] = useState<number | null>(null)
+  const [expandedPoints, setExpandedPoints] = useState<Set<string>>(
+    () => new Set(),
+  )
 
   const togglePoint = (pointId: string) => {
     setExpandedPoints((current) => {
-      const next = new Set(current);
+      const next = new Set(current)
       if (next.has(pointId)) {
-        next.delete(pointId);
+        next.delete(pointId)
       } else {
-        next.add(pointId);
+        next.add(pointId)
       }
-      return next;
-    });
-  };
+      return next
+    })
+  }
 
   return (
     <div className="content-section content-section-wide">
@@ -679,7 +809,9 @@ export function ExperienceSection({ playSound }: SectionProps) {
         <span aria-hidden="true" className="timeline-line" />
         {experienceMilestones.map((event, index) => (
           <div
-            className={`timeline-entry${index % 2 ? " timeline-entry-right" : ""}`}
+            className={`timeline-entry${
+              index % 2 ? " timeline-entry-right" : ""
+            }`}
             key={`${event.title}-${index}`}
           >
             <div className="timeline-marker">{event.marker}</div>
@@ -688,8 +820,10 @@ export function ExperienceSection({ playSound }: SectionProps) {
                 aria-expanded={expandedRole === index}
                 className="timeline-position-trigger"
                 onClick={() => {
-                  playSound("ding", 0.2);
-                  setExpandedRole((current) => (current === index ? null : index));
+                  playSound("ding", 0.2)
+                  setExpandedRole((current) =>
+                    current === index ? null : index,
+                  )
                 }}
                 onPointerEnter={() => playSound("boop", 0.12)}
                 variant="ghost"
@@ -697,18 +831,22 @@ export function ExperienceSection({ playSound }: SectionProps) {
                 <span className="card-title">{event.title}</span>
                 <span
                   aria-hidden="true"
-                  className={`quest-chevron${expandedRole === index ? " is-open" : ""}`}
+                  className={`quest-chevron${
+                    expandedRole === index ? " is-open" : ""
+                  }`}
                 />
               </Button>
 
               <div
                 aria-hidden={expandedRole !== index}
-                className={`timeline-point-panel${expandedRole === index ? " is-open" : ""}`}
+                className={`timeline-point-panel${
+                  expandedRole === index ? " is-open" : ""
+                }`}
               >
                 <div className="timeline-point-list">
                   {event.points.map((point, pointIndex) => {
-                    const pointId = `${index}-${pointIndex}`;
-                    const isExpanded = expandedPoints.has(pointId);
+                    const pointId = `${index}-${pointIndex}`
+                    const isExpanded = expandedPoints.has(pointId)
 
                     return (
                       <div className="timeline-point" key={point.description}>
@@ -717,7 +855,9 @@ export function ExperienceSection({ playSound }: SectionProps) {
                           <span>{point.metric}</span>
                         </div>
                         <div
-                          className={`timeline-point-body${isExpanded ? " is-expanded" : ""}`}
+                          className={`timeline-point-body${
+                            isExpanded ? " is-expanded" : ""
+                          }`}
                         >
                           <span>{point.description}</span>
                           <Button
@@ -728,8 +868,8 @@ export function ExperienceSection({ playSound }: SectionProps) {
                             }
                             className="timeline-point-more"
                             onClick={() => {
-                              playSound("ding", 0.16);
-                              togglePoint(pointId);
+                              playSound("ding", 0.16)
+                              togglePoint(pointId)
                             }}
                             tabIndex={expandedRole === index ? 0 : -1}
                             variant="ghost"
@@ -738,7 +878,7 @@ export function ExperienceSection({ playSound }: SectionProps) {
                           </Button>
                         </div>
                       </div>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -751,7 +891,7 @@ export function ExperienceSection({ playSound }: SectionProps) {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 export function SkillsSection() {
@@ -768,7 +908,9 @@ export function SkillsSection() {
           <div className="character-avatar">AP</div>
           <div>
             <div className="card-title character-name">Aditya Pawar</div>
-            <div className="card-subtitle">Fullstack Developer · Builder Class</div>
+            <div className="card-subtitle">
+              Fullstack Developer · Builder Class
+            </div>
           </div>
           <span className="status-badge">LV. 2026</span>
         </div>
@@ -830,6 +972,28 @@ export function SkillsSection() {
           <div className="sheet-heading">Equipment</div>
           <div className="equipment-list">
             <div className="equipment-row">
+              <span className="equipment-slot">Cloud & DevOps</span>
+              <div className="equipment-items">
+                {devopsSkills.map((skill) => (
+                  <span className="equipment-item" key={skill.label}>
+                    <PixelIcon source={skill.icon} />
+                    {skill.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="equipment-row">
+              <span className="equipment-slot">Testing & QA</span>
+              <div className="equipment-items">
+                {testingSkills.map((skill) => (
+                  <span className="equipment-item" key={skill.label}>
+                    <PixelIcon source={skill.icon} />
+                    {skill.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="equipment-row">
               <span className="equipment-slot">Security</span>
               <div className="equipment-items">
                 {securitySkills.map((skill) => (
@@ -841,9 +1005,9 @@ export function SkillsSection() {
               </div>
             </div>
             <div className="equipment-row">
-              <span className="equipment-slot">Tooling</span>
+              <span className="equipment-slot">Automation</span>
               <div className="equipment-items">
-                {toolingSkills.map((skill) => (
+                {automationSkills.map((skill) => (
                   <span className="equipment-item" key={skill.label}>
                     <PixelIcon source={skill.icon} />
                     {skill.label}
@@ -855,15 +1019,20 @@ export function SkillsSection() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export function NotFoundSection({ onHome, playSound }: SectionProps & { onHome: () => void }) {
+export function NotFoundSection({
+  onHome,
+  playSound,
+}: SectionProps & { onHome: () => void }) {
   return (
     <div className="content-section not-found-section">
       <div className="not-found-title">ERROR 404</div>
       <div className="section-title">Break out of here</div>
-      <div className="section-description">That route fell outside the map. Clear the wall or return home.</div>
+      <div className="section-description">
+        That route fell outside the map. Clear the wall or return home.
+      </div>
       <div aria-hidden="true" className="brick-board">
         <div className="brick-wall">
           {Array.from({ length: 30 }, (_, index) => (
@@ -876,8 +1045,8 @@ export function NotFoundSection({ onHome, playSound }: SectionProps & { onHome: 
       <Button
         className="not-found-home"
         onClick={() => {
-          playSound("ding");
-          onHome();
+          playSound("ding")
+          onHome()
         }}
         variant="default"
       >
@@ -885,7 +1054,7 @@ export function NotFoundSection({ onHome, playSound }: SectionProps & { onHome: 
         Return Home
       </Button>
     </div>
-  );
+  )
 }
 
 const contactChannels = [
@@ -893,7 +1062,8 @@ const contactChannels = [
     id: "email",
     title: "Direct Mail",
     subtitle: "contact.aditya.pawar@gmail.com",
-    description: "Best channel for job opportunities, contracts, engineering discussions, and direct inquiries.",
+    description:
+      "Best channel for job opportunities, contracts, engineering discussions, and direct inquiries.",
     actionLabel: "Send Transmission",
     actionUrl: "mailto:contact.aditya.pawar@gmail.com",
     icon: mailIcon,
@@ -903,7 +1073,8 @@ const contactChannels = [
     id: "linkedin",
     title: "LinkedIn Network",
     subtitle: "adityapawar112",
-    description: "Professional background, career updates, collaborative connections, and peer recommendations.",
+    description:
+      "Professional background, career updates, collaborative connections, and peer recommendations.",
     actionLabel: "View Profile",
     actionUrl: "https://www.linkedin.com/in/adityapawar112/",
     icon: linkedinIcon,
@@ -912,7 +1083,8 @@ const contactChannels = [
     id: "github",
     title: "GitHub Repositories",
     subtitle: "@adityapawar112",
-    description: "Production codebases, open-source utilities, offline-first architectures, and experiments.",
+    description:
+      "Production codebases, open-source utilities, offline-first architectures, and experiments.",
     actionLabel: "Open GitHub",
     actionUrl: "https://github.com/adityapawar112",
     icon: githubIcon,
@@ -921,12 +1093,14 @@ const contactChannels = [
     id: "resume",
     title: "Curriculum Vitae",
     subtitle: "Aditya Pawar - Fullstack Developer",
-    description: "Comprehensive PDF detailing hands-on production engineering, tech stack, and achievements.",
+    description:
+      "Comprehensive PDF detailing hands-on production engineering, tech stack, and achievements.",
     actionLabel: "View Resume (PDF)",
-    actionUrl: "https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing",
+    actionUrl:
+      "https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing",
     icon: fileTextIcon,
   },
-];
+]
 
 const generalAttributions = [
   {
@@ -986,45 +1160,52 @@ const generalAttributions = [
     primaryUrl: "https://vercel.com",
     primaryLabel: "Deployed on Vercel",
   },
-];
+]
 
 export function ContactSection({ playSound }: SectionProps) {
-  const [activeTab, setActiveTab] = useState<"contact" | "attributions">("contact");
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [activeTab, setActiveTab] = useState<"contact" | "attributions">(
+    "contact",
+  )
+  const [copiedEmail, setCopiedEmail] = useState(false)
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText("contact.aditya.pawar@gmail.com");
-      setCopiedEmail(true);
-      playSound("ding", 0.2);
-      setTimeout(() => setCopiedEmail(false), 2000);
+      await navigator.clipboard.writeText("contact.aditya.pawar@gmail.com")
+      setCopiedEmail(true)
+      playSound("ding", 0.2)
+      setTimeout(() => setCopiedEmail(false), 2000)
     } catch {
       // ignore
     }
-  };
+  }
 
   const openExternal = (url: string) => {
-    playSound("chord", 0.3);
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
+    playSound("chord", 0.3)
+    window.open(url, "_blank", "noopener,noreferrer")
+  }
 
   const openMail = () => {
-    playSound("chord", 0.3);
-    window.location.href = "mailto:contact.aditya.pawar@gmail.com";
-  };
+    playSound("chord", 0.3)
+    window.location.href = "mailto:contact.aditya.pawar@gmail.com"
+  }
 
   return (
     <div className="content-section">
       <SectionHeading
+        className="contact-section-heading"
         action={
-          <div aria-label="Contact section views" className="contact-tab-toggle" role="group">
+          <div
+            aria-label="Contact section views"
+            className="contact-tab-toggle"
+            role="group"
+          >
             <Button
               aria-label="Contact channels"
               aria-pressed={activeTab === "contact"}
               className="contact-tab-button"
               onClick={() => {
-                setActiveTab("contact");
-                playSound("ding", 0.2);
+                setActiveTab("contact")
+                playSound("ding", 0.2)
               }}
               onPointerEnter={() => playSound("boop", 0.1)}
               title="Contact channels"
@@ -1038,8 +1219,8 @@ export function ContactSection({ playSound }: SectionProps) {
               aria-pressed={activeTab === "attributions"}
               className="contact-tab-button"
               onClick={() => {
-                setActiveTab("attributions");
-                playSound("ding", 0.2);
+                setActiveTab("attributions")
+                playSound("ding", 0.2)
               }}
               onPointerEnter={() => playSound("boop", 0.1)}
               title="Credits & Attributions"
@@ -1065,12 +1246,15 @@ export function ContactSection({ playSound }: SectionProps) {
           <div className="pixel-card contact-availability-card">
             <div className="card-topline">
               <span className="status-badge">Available Now</span>
-              <span className="contact-location">Pune, India · Remote / On-Site</span>
+              <span className="contact-location">
+                Pune, India · Remote / On-Site
+              </span>
             </div>
             <div className="card-title">Open for Engineering Roles</div>
             <div className="card-copy">
-              Actively seeking full-time Fullstack, Frontend, or Backend developer roles.
-              Experienced in building Next.js web applications, REST APIs, and offline-first desktop systems.
+              Actively seeking full-time Fullstack, Frontend, or Backend
+              developer roles. Experienced in building Next.js web applications,
+              REST APIs, and offline-first desktop systems.
             </div>
           </div>
 
@@ -1095,15 +1279,19 @@ export function ContactSection({ playSound }: SectionProps) {
                     className="contact-action-btn"
                     onClick={() => {
                       if (channel.id === "email") {
-                        openMail();
+                        openMail()
                       } else {
-                        openExternal(channel.actionUrl);
+                        openExternal(channel.actionUrl)
                       }
                     }}
                     onPointerEnter={() => playSound("boop", 0.1)}
                     variant="default"
                   >
-                    <PixelIcon source={channel.id === "email" ? mailIcon : externalLinkIcon} />
+                    <PixelIcon
+                      source={
+                        channel.id === "email" ? mailIcon : externalLinkIcon
+                      }
+                    />
                     {channel.actionLabel}
                   </Button>
 
@@ -1129,14 +1317,15 @@ export function ContactSection({ playSound }: SectionProps) {
             <div>
               <div className="card-title">Portfolio Credits & Attributions</div>
               <div className="card-copy">
-                Explore the Golden Sun soundtrack links, 8bitcn UI primitives, Google Fonts, CraftPix backgrounds, and Ambroggio sound effects.
+                Explore the Golden Sun soundtrack links, 8bitcn UI primitives,
+                Google Fonts, CraftPix backgrounds, and Ambroggio sound effects.
               </div>
             </div>
             <Button
               className="attribution-banner-btn"
               onClick={() => {
-                setActiveTab("attributions");
-                playSound("ding", 0.2);
+                setActiveTab("attributions")
+                playSound("ding", 0.2)
               }}
               onPointerEnter={() => playSound("boop", 0.1)}
               variant="default"
@@ -1155,7 +1344,8 @@ export function ContactSection({ playSound }: SectionProps) {
             </div>
             <div className="card-title">Acknowledgments & Attributions</div>
             <div className="card-copy">
-              Honoring the classic games, sound artists, font designers, and open-source packages that power this 16-bit retro experience.
+              Honoring the classic games, sound artists, font designers, and
+              open-source packages that power this 16-bit retro experience.
             </div>
           </div>
 
@@ -1166,13 +1356,18 @@ export function ContactSection({ playSound }: SectionProps) {
                 <span>Realm Background Music — Golden Sun & The Lost Age</span>
               </div>
               <div className="attribution-group-subtitle">
-                Composed by Motoi Sakuraba · © Camelot Software Planning / Nintendo
+                Composed by Motoi Sakuraba · © Camelot Software Planning /
+                Nintendo
               </div>
               <div className="attribution-group-desc">
-                <span>Soundtrack catalog and internal Battle Mode player reference:</span>
+                <span>
+                  Soundtrack catalog and internal Battle Mode player reference:
+                </span>
                 <Button
                   className="inline-credit-link"
-                  onClick={() => openExternal("https://goldensunwiki.net/wiki/Music")}
+                  onClick={() =>
+                    openExternal("https://goldensunwiki.net/wiki/Music")
+                  }
                   onPointerEnter={() => playSound("boop", 0.1)}
                   variant="ghost"
                 >
@@ -1184,18 +1379,27 @@ export function ContactSection({ playSound }: SectionProps) {
 
             <div className="attribution-music-grid">
               {realmCategories.map((category) => {
-                const track = realmMusicTracks[category.id];
+                const track = realmMusicTracks[category.id]
                 return (
-                  <div className="pixel-card attribution-music-card" key={category.id}>
+                  <div
+                    className="pixel-card attribution-music-card"
+                    key={category.id}
+                  >
                     <div className="music-card-header">
-                      <span className={`status-badge music-category-badge theme-${category.id}`}>
+                      <span
+                        className={`status-badge music-category-badge theme-${category.id}`}
+                      >
                         {category.label}
                       </span>
-                      <span className="music-badge-pill">{track.badgeLabel}</span>
+                      <span className="music-badge-pill">
+                        {track.badgeLabel}
+                      </span>
                     </div>
                     <div className="music-card-title">{track.title}</div>
                     <div className="music-card-game">
-                      {track.game === "GS" ? "Golden Sun (GS)" : "The Lost Age (TLA)"}
+                      {track.game === "GS"
+                        ? "Golden Sun (GS)"
+                        : "The Lost Age (TLA)"}
                     </div>
                     <Button
                       className="music-listen-btn"
@@ -1207,7 +1411,7 @@ export function ContactSection({ playSound }: SectionProps) {
                       Listen on YouTube
                     </Button>
                   </div>
-                );
+                )
               })}
             </div>
           </div>
@@ -1225,7 +1429,10 @@ export function ContactSection({ playSound }: SectionProps) {
 
             <div className="attribution-grid">
               {generalAttributions.map((resource) => (
-                <div className="pixel-card attribution-card" key={resource.title}>
+                <div
+                  className="pixel-card attribution-card"
+                  key={resource.title}
+                >
                   <div>
                     <div className="card-topline">
                       <span className="status-badge">{resource.category}</span>
@@ -1266,18 +1473,17 @@ export function ContactSection({ playSound }: SectionProps) {
           <div className="contact-switch-footer">
             <Button
               onClick={() => {
-                setActiveTab("contact");
-                playSound("ding", 0.2);
+                setActiveTab("contact")
+                playSound("ding", 0.2)
               }}
               onPointerEnter={() => playSound("boop", 0.1)}
               variant="default"
             >
-              <PixelIcon source={mailIcon} />
-              ← Back to Contact Transmissions
+              <PixelIcon source={mailIcon} />← Back to Contact Transmissions
             </Button>
           </div>
         </>
       )}
     </div>
-  );
+  )
 }

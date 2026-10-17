@@ -47,6 +47,17 @@ This project uses **Tailwind CSS v4** through the `@tailwindcss/vite` plugin con
 - Use the local `Button` and `PixelIcon` components. Use static Pixelarticons SVG imports rather than runtime icon hooks.
 - The home screen must remain fixed and non-scrolling. Use the existing phone, short-phone, tablet, and desktop responsive patterns.
 
+## Library-First Component & Asset Utilization Rules
+
+1. **First-Party Icon Priority (Pixelarticons):**
+   - Always audit `pixelarticons` (`node_modules/pixelarticons/svg/`) for an exact or direct first-party brand/technology icon match before using generic alternatives.
+   - Example: If a project uses Docker, import and use `docker.svg` (`dockerIcon`), NOT a generic `cloudServerIcon`. If a tool uses Git, use `git-branch.svg` / `github.svg`.
+   - Only when `pixelarticons` genuinely lacks a dedicated icon for that specific technology (e.g. Node.js, PostgreSQL, Vitest) may an appropriate semantic alternative/fallback from the library be used (e.g. `server.svg` for Node.js, `database.svg` for PostgreSQL, `test-tube.svg` for Vitest, `chart-line.svg` for Prometheus, `speed-fast.svg` for k6).
+2. **Library-First UI Components (8bitcn & Design Primitives):**
+   - Always leverage and compose the existing components and primitives provided by the installed library/design system (`8bitcn`, local primitives in `src/components/ui/`) that fit best.
+   - Only build a bespoke UI component from scratch if no provided primitive appropriately satisfies the functional or aesthetic requirement.
+
+
 ## Product invariants
 
 - Menu order: Start, About Me, Skills, Experience, Projects.

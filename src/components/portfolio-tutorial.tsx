@@ -1,41 +1,41 @@
-import { useEffect, useState, type CSSProperties } from "react";
-import arrowLeftIcon from "pixelarticons/svg/arrow-left.svg?url";
-import arrowRightIcon from "pixelarticons/svg/arrow-right.svg?url";
-import fileTextIcon from "pixelarticons/svg/file-text.svg?url";
-import mailIcon from "pixelarticons/svg/mail.svg?url";
-import xIcon from "pixelarticons/svg/x.svg?url";
+import { useEffect, useState, type CSSProperties } from "react"
+import arrowLeftIcon from "pixelarticons/svg/arrow-left.svg?url"
+import arrowRightIcon from "pixelarticons/svg/arrow-right.svg?url"
+import fileTextIcon from "pixelarticons/svg/file-text.svg?url"
+import mailIcon from "pixelarticons/svg/mail.svg?url"
+import xIcon from "pixelarticons/svg/x.svg?url"
 
-import type { UiSound } from "../hooks/use-ui-sounds";
-import type { PortfolioSectionId } from "./portfolio-sections";
-import { Button } from "./ui/8bit-button";
-import { PixelIcon } from "./ui/pixel-icon";
+import type { UiSound } from "../hooks/use-ui-sounds"
+import type { PortfolioSectionId } from "./portfolio-sections"
+import { Button } from "./ui/8bit-button"
+import { PixelIcon } from "./ui/pixel-icon"
 
-type TutorialView = Exclude<PortfolioSectionId, "start"> | null;
+type TutorialView = Exclude<PortfolioSectionId, "start"> | null
 
 interface TutorialStep {
-  view: TutorialView;
-  target: string;
-  label: string;
-  title: string;
-  copy: string;
-  prompt: string;
+  view: TutorialView
+  target: string
+  label: string
+  title: string
+  copy: string
+  prompt: string
 }
 
 interface TargetRect {
-  bottom: number;
-  height: number;
-  left: number;
-  right: number;
-  top: number;
-  width: number;
+  bottom: number
+  height: number
+  left: number
+  right: number
+  top: number
+  width: number
 }
 
 interface PortfolioTutorialProps {
-  initialStep: number;
-  onClose: () => void;
-  onPause: (step: number) => void;
-  onViewChange: (view: TutorialView) => void;
-  playSound: (sound: UiSound, volume?: number) => void;
+  initialStep: number
+  onClose: () => void
+  onPause: (step: number) => void
+  onViewChange: (view: TutorialView) => void
+  playSound: (sound: UiSound, volume?: number) => void
 }
 
 const tutorialSteps: TutorialStep[] = [
@@ -76,7 +76,7 @@ const tutorialSteps: TutorialStep[] = [
     target: "menu-experience",
     label: "New quest marker",
     title: "Follow the production timeline",
-    copy: "At Ioncure Tech, Aditya shipped multi-tenant conference platforms, secure payment infrastructure, role-based access systems, production websites, hiring automation, and internal onboarding documentation.",
+    copy: "At Ioncure Tech, Aditya shipped multi-tenant conference platforms, dual-gateway payment infrastructure, tenant-scoped role-based access systems, and responsive event discovery portals.",
     prompt: "Enter Experience",
   },
   {
@@ -84,7 +84,7 @@ const tutorialSteps: TutorialStep[] = [
     target: "section-experience",
     label: "Chapter 03 · Experience",
     title: "Open each milestone for evidence",
-    copy: "The work supported more than 20 events and 1,000 users, processed over $50K, reduced conference setup from four hours to ten minutes, and automated applicant processing.",
+    copy: "The work supported more than 20 events and 1,000 users, prevented duplicate transactions, reduced conference setup from four hours to ten minutes, and synchronized event schedules.",
     prompt: "Return to the map",
   },
   {
@@ -92,15 +92,15 @@ const tutorialSteps: TutorialStep[] = [
     target: "menu-projects",
     label: "Boss quest located",
     title: "The strongest work is in the quest log",
-    copy: "ScaleERP combines an offline-first Electron inventory and billing application with a Next.js and Supabase control plane for licensing, releases, telemetry, and documentation.",
+    copy: "Explore SynapseState (distributed feature flag control plane on k3s) and ScaleERP (offline-first retail suite with cloud licensing and Google Drive sync).",
     prompt: "Enter Projects",
   },
   {
     view: "projects",
     target: "section-projects",
     label: "Chapter 04 · Projects",
-    title: "ScaleERP is the featured campaign",
-    copy: "The system includes a 28-table SQLite schema, sub-50 ms search across 10,000 items, RSA-signed offline licenses, encrypted Google Drive backups, hardened APIs, and automated release checks.",
+    title: "Production Systems & Distributed Engines",
+    copy: "The quest log features a containerized feature flag engine benchmarked with k6, an offline-first 28-table SQLite desktop workstation, and a Next.js 15 cloud licensing portal.",
     prompt: "Reach the final checkpoint",
   },
   {
@@ -119,25 +119,25 @@ const tutorialSteps: TutorialStep[] = [
     copy: "The portfolio includes 52 animated pixel environments across Summer, Autumn, Winter, Forest, Mountains, Desert, Clouds, and Wasteland, with persistent sound and CRT preferences.",
     prompt: "Finish tutorial",
   },
-];
+]
 
 const resumeUrl =
-  "https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing";
+  "https://drive.google.com/file/d/1FUNXmA1O8GVfLJPOQnl_7lKeoMaarp54/view?usp=sharing"
 
 function getStepDuration(step: TutorialStep) {
-  const wordCount = `${step.title} ${step.copy}`.trim().split(/\s+/).length;
-  return Math.min(22_000, Math.max(11_000, (wordCount / 130) * 60_000 + 2_500));
+  const wordCount = `${step.title} ${step.copy}`.trim().split(/\s+/).length
+  return Math.min(22_000, Math.max(11_000, (wordCount / 130) * 60_000 + 2_500))
 }
 
 function getCalloutPosition(rect: TargetRect) {
-  const gutter = 24;
-  const edge = 16;
-  const width = Math.min(352, window.innerWidth - edge * 2);
-  const estimatedHeight = 300;
+  const gutter = 24
+  const edge = 16
+  const width = Math.min(352, window.innerWidth - edge * 2)
+  const estimatedHeight = 300
   const clampLeft = (value: number) =>
-    Math.max(edge, Math.min(value, window.innerWidth - width - edge));
+    Math.max(edge, Math.min(value, window.innerWidth - width - edge))
   const clampTop = (value: number) =>
-    Math.max(edge, Math.min(value, window.innerHeight - estimatedHeight - edge));
+    Math.max(edge, Math.min(value, window.innerHeight - estimatedHeight - edge))
 
   if (rect.left >= width + gutter + edge) {
     return {
@@ -145,7 +145,7 @@ function getCalloutPosition(rect: TargetRect) {
       left: rect.left - width - gutter,
       top: clampTop(rect.top + rect.height / 2 - estimatedHeight / 2),
       width,
-    };
+    }
   }
 
   if (window.innerWidth - rect.right >= width + gutter + edge) {
@@ -154,7 +154,7 @@ function getCalloutPosition(rect: TargetRect) {
       left: rect.right + gutter,
       top: clampTop(rect.top + rect.height / 2 - estimatedHeight / 2),
       width,
-    };
+    }
   }
 
   if (rect.top >= estimatedHeight + gutter + edge) {
@@ -163,7 +163,7 @@ function getCalloutPosition(rect: TargetRect) {
       left: clampLeft(rect.left + rect.width / 2 - width / 2),
       top: rect.top - estimatedHeight - gutter,
       width,
-    };
+    }
   }
 
   return {
@@ -171,7 +171,7 @@ function getCalloutPosition(rect: TargetRect) {
     left: clampLeft(rect.left + rect.width / 2 - width / 2),
     top: clampTop(rect.bottom + gutter),
     width,
-  };
+  }
 }
 
 export function PortfolioTutorial({
@@ -181,41 +181,42 @@ export function PortfolioTutorial({
   onViewChange,
   playSound,
 }: PortfolioTutorialProps) {
-  const [stepIndex, setStepIndex] = useState(initialStep);
-  const [elapsed, setElapsed] = useState(0);
-  const [targetRect, setTargetRect] = useState<TargetRect | null>(null);
-  const [matchedTarget, setMatchedTarget] = useState<string | null>(null);
-  const [activePosition, setActivePosition] = useState<ReturnType<typeof getCalloutPosition> | null>(() => {
-    if (typeof window === "undefined") return null;
-    const width = Math.min(352, window.innerWidth - 32);
-    return {
-      direction: "up",
-      left: Math.max(16, (window.innerWidth - width) / 2),
-      top: Math.max(16, (window.innerHeight - 300) / 2),
-      width,
-    };
-  });
+  const [stepIndex, setStepIndex] = useState(initialStep)
+  const [elapsed, setElapsed] = useState(0)
+  const [targetRect, setTargetRect] = useState<TargetRect | null>(null)
+  const [matchedTarget, setMatchedTarget] = useState<string | null>(null)
+  const [activePosition, setActivePosition] =
+    useState<ReturnType<typeof getCalloutPosition> | null>(() => {
+      if (typeof window === "undefined") return null
+      const width = Math.min(352, window.innerWidth - 32)
+      return {
+        direction: "up",
+        left: Math.max(16, (window.innerWidth - width) / 2),
+        top: Math.max(16, (window.innerHeight - 300) / 2),
+        width,
+      }
+    })
 
-  const step = tutorialSteps[stepIndex];
-  const stepDuration = getStepDuration(step);
-
-  useEffect(() => {
-    onViewChange(step.view);
-  }, []);
+  const step = tutorialSteps[stepIndex]
+  const stepDuration = getStepDuration(step)
 
   useEffect(() => {
-    let active = true;
+    onViewChange(step.view)
+  }, [])
+
+  useEffect(() => {
+    let active = true
 
     const updateTarget = () => {
-      if (!active) return;
+      if (!active) return
       const target = document.querySelector<HTMLElement>(
         `[data-tutorial-target="${step.target}"]`,
-      );
+      )
       if (!target) {
-        return;
+        return
       }
 
-      const rect = target.getBoundingClientRect();
+      const rect = target.getBoundingClientRect()
       const rectData: TargetRect = {
         bottom: rect.bottom,
         height: rect.height,
@@ -223,102 +224,113 @@ export function PortfolioTutorial({
         right: rect.right,
         top: rect.top,
         width: rect.width,
-      };
+      }
 
-      setTargetRect(rectData);
-      setMatchedTarget(step.target);
-      setActivePosition(getCalloutPosition(rectData));
-    };
+      setTargetRect(rectData)
+      setMatchedTarget(step.target)
+      setActivePosition(getCalloutPosition(rectData))
+    }
 
-    updateTarget();
-    const frame = window.requestAnimationFrame(updateTarget);
-    const timer1 = window.setTimeout(updateTarget, 80);
-    const timer2 = window.setTimeout(updateTarget, 200);
-    window.addEventListener("resize", updateTarget);
-    window.addEventListener("scroll", updateTarget, true);
+    updateTarget()
+    const frame = window.requestAnimationFrame(updateTarget)
+    const timer1 = window.setTimeout(updateTarget, 80)
+    const timer2 = window.setTimeout(updateTarget, 200)
+    window.addEventListener("resize", updateTarget)
+    window.addEventListener("scroll", updateTarget, true)
 
     return () => {
-      active = false;
-      window.cancelAnimationFrame(frame);
-      window.clearTimeout(timer1);
-      window.clearTimeout(timer2);
-      window.removeEventListener("resize", updateTarget);
-      window.removeEventListener("scroll", updateTarget, true);
-    };
-  }, [step.target, step.view]);
+      active = false
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(timer1)
+      window.clearTimeout(timer2)
+      window.removeEventListener("resize", updateTarget)
+      window.removeEventListener("scroll", updateTarget, true)
+    }
+  }, [step.target, step.view])
 
   const moveToStep = (nextIndex: number) => {
-    const boundedIndex = Math.max(0, Math.min(nextIndex, tutorialSteps.length - 1));
-    const nextStep = tutorialSteps[boundedIndex];
-    setElapsed(0);
-    setStepIndex(boundedIndex);
-    onViewChange(nextStep.view);
-    playSound("ding", 0.2);
-  };
+    const boundedIndex = Math.max(
+      0,
+      Math.min(nextIndex, tutorialSteps.length - 1),
+    )
+    const nextStep = tutorialSteps[boundedIndex]
+    setElapsed(0)
+    setStepIndex(boundedIndex)
+    onViewChange(nextStep.view)
+    playSound("ding", 0.2)
+  }
 
   const goNext = () => {
     if (stepIndex === tutorialSteps.length - 1) {
-      playSound("chord", 0.25);
-      onClose();
-      return;
+      playSound("chord", 0.25)
+      onClose()
+      return
     }
-    moveToStep(stepIndex + 1);
-  };
+    moveToStep(stepIndex + 1)
+  }
 
   useEffect(() => {
-    setElapsed(0);
-    const startedAt = performance.now();
+    setElapsed(0)
+    const startedAt = performance.now()
     const progressTimer = window.setInterval(() => {
-      setElapsed(Math.min(performance.now() - startedAt, stepDuration));
-    }, 100);
-    const advanceTimer = window.setTimeout(goNext, stepDuration);
+      setElapsed(Math.min(performance.now() - startedAt, stepDuration))
+    }, 100)
+    const advanceTimer = window.setTimeout(goNext, stepDuration)
 
     return () => {
-      window.clearInterval(progressTimer);
-      window.clearTimeout(advanceTimer);
-    };
-  }, [stepIndex]);
+      window.clearInterval(progressTimer)
+      window.clearTimeout(advanceTimer)
+    }
+  }, [stepIndex])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        event.preventDefault();
-        onClose();
+        event.preventDefault()
+        onClose()
       } else if (event.key === "Enter" || event.key === "ArrowRight") {
-        event.preventDefault();
-        goNext();
+        event.preventDefault()
+        goNext()
       } else if (event.key === "ArrowLeft" && stepIndex > 0) {
-        event.preventDefault();
-        moveToStep(stepIndex - 1);
+        event.preventDefault()
+        moveToStep(stepIndex - 1)
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  });
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  })
 
-  const isStepReady = matchedTarget === step.target;
+  const isStepReady = matchedTarget === step.target
   const overlayStyle = targetRect
-    ? ({
+    ? {
         "--tutorial-height": `${targetRect.height}px`,
         "--tutorial-left": `${targetRect.left}px`,
         "--tutorial-top": `${targetRect.top}px`,
         "--tutorial-width": `${targetRect.width}px`,
-      } as CSSProperties)
-    : undefined;
+      } as CSSProperties
+    : undefined
   const calloutStyle = activePosition
-    ? ({
+    ? {
         "--tutorial-callout-left": `${activePosition.left}px`,
         "--tutorial-callout-top": `${activePosition.top}px`,
         "--tutorial-callout-width": `${activePosition.width}px`,
-      } as CSSProperties)
-    : undefined;
+      } as CSSProperties
+    : undefined
 
   return (
-    <div aria-label="Guided portfolio tutorial" className="tutorial-layer" role="dialog">
+    <div
+      aria-label="Guided portfolio tutorial"
+      className="tutorial-layer"
+      role="dialog"
+    >
       <div aria-hidden="true" className="tutorial-guard" />
       {isStepReady && targetRect && (
-        <div aria-hidden="true" className="tutorial-spotlight" style={overlayStyle} />
+        <div
+          aria-hidden="true"
+          className="tutorial-spotlight"
+          style={overlayStyle}
+        />
       )}
 
       <div
@@ -334,8 +346,8 @@ export function PortfolioTutorial({
             aria-label="Exit tutorial"
             className="tutorial-close"
             onClick={() => {
-              playSound("ding", 0.16);
-              onClose();
+              playSound("ding", 0.16)
+              onClose()
             }}
             title="Exit tutorial"
             variant="ghost"
@@ -370,8 +382,8 @@ export function PortfolioTutorial({
           <div className="tutorial-final-actions">
             <Button
               onClick={() => {
-                playSound("chord", 0.25);
-                window.open(resumeUrl, "_blank", "noopener,noreferrer");
+                playSound("chord", 0.25)
+                window.open(resumeUrl, "_blank", "noopener,noreferrer")
               }}
               variant="ghost"
             >
@@ -380,8 +392,8 @@ export function PortfolioTutorial({
             </Button>
             <Button
               onClick={() => {
-                playSound("chord", 0.25);
-                window.location.href = "mailto:contact.aditya.pawar@gmail.com";
+                playSound("chord", 0.25)
+                window.location.href = "mailto:contact.aditya.pawar@gmail.com"
               }}
               variant="ghost"
             >
@@ -396,8 +408,8 @@ export function PortfolioTutorial({
             <Button
               className="tutorial-explore"
               onClick={() => {
-                playSound("ding", 0.16);
-                onPause(stepIndex);
+                playSound("ding", 0.16)
+                onPause(stepIndex)
               }}
               variant="ghost"
             >
@@ -406,10 +418,12 @@ export function PortfolioTutorial({
             <div className="tutorial-step-nav">
               <Button
                 aria-label="Previous tutorial step"
-                className={`tutorial-previous${stepIndex === 0 ? " is-disabled" : ""}`}
+                className={`tutorial-previous${
+                  stepIndex === 0 ? " is-disabled" : ""
+                }`}
                 disabled={stepIndex === 0}
                 onClick={() => {
-                  if (stepIndex > 0) moveToStep(stepIndex - 1);
+                  if (stepIndex > 0) moveToStep(stepIndex - 1)
                 }}
                 variant="ghost"
               >
@@ -436,5 +450,5 @@ export function PortfolioTutorial({
         </div>
       </div>
     </div>
-  );
+  )
 }
