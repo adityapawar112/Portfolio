@@ -51,9 +51,39 @@ function normalizeSiteUrl(value: string | undefined): string {
 
 function portfolioSeoFiles(siteUrl: string): Plugin {
   const robotsTxt = [
+    "# Allow all crawlers and search engines",
     "User-agent: *",
     "Allow: /",
-    ...(siteUrl ? ["", `Sitemap: ${siteUrl}/sitemap.xml`] : []),
+    "",
+    "# Explicitly allow AI and LLM crawlers to crawl freely",
+    "User-agent: GPTBot",
+    "User-agent: ChatGPT-User",
+    "User-agent: OAI-SearchBot",
+    "User-agent: ClaudeBot",
+    "User-agent: Claude-Web",
+    "User-agent: anthropic-ai",
+    "User-agent: PerplexityBot",
+    "User-agent: Google-Extended",
+    "User-agent: GoogleOther",
+    "User-agent: Applebot-Extended",
+    "User-agent: Meta-ExternalAgent",
+    "User-agent: Meta-ExternalFetcher",
+    "User-agent: cohere-ai",
+    "User-agent: MistralBot",
+    "User-agent: Bytespider",
+    "User-agent: DuckAssistBot",
+    "User-agent: CCBot",
+    "Allow: /",
+    ...(siteUrl
+      ? [
+          "",
+          `Sitemap: ${siteUrl}/sitemap.xml`,
+          "",
+          "# LLM knowledge bundle",
+          `# ${siteUrl}/llms.txt`,
+          `# ${siteUrl}/llm.txt`,
+        ]
+      : []),
     "",
   ].join("\n")
   const sitemapXml = [
