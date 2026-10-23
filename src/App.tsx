@@ -493,7 +493,7 @@ export default function App() {
               <img
                 alt="Aditya Pawar"
                 className="intro-profile-img"
-                src="/profile-pic.png"
+                src="/profile-pic/subject.png"
               />
             </div>
 

@@ -517,7 +517,7 @@ export function AboutSection({ playSound }: SectionProps) {
                 <img
                   alt="Aditya Pawar"
                   className="avatar-profile-img"
-                  src="/profile-pic.png"
+                  src="/profile-pic/subject.png"
                 />
               </div>
               <div className="dialogue-box">
@@ -913,7 +913,7 @@ export function SkillsSection() {
             <img
               alt="Aditya Pawar"
               className="avatar-profile-img"
-              src="/profile-pic.png"
+              src="/profile-pic/subject.png"
             />
           </div>
           <div>
