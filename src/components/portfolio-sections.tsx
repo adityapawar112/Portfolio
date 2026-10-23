@@ -514,7 +514,11 @@ export function AboutSection({ playSound }: SectionProps) {
                 className="human-avatar"
                 role="img"
               >
-                AP
+                <img
+                  alt="Aditya Pawar"
+                  className="avatar-profile-img"
+                  src="/profile-pic.png"
+                />
               </div>
               <div className="dialogue-box">
                 <div className="dialogue-speaker">Aditya</div>
@@ -905,7 +909,13 @@ export function SkillsSection() {
       />
       <div className="pixel-card character-sheet">
         <div className="character-header">
-          <div className="character-avatar">AP</div>
+          <div className="character-avatar">
+            <img
+              alt="Aditya Pawar"
+              className="avatar-profile-img"
+              src="/profile-pic.png"
+            />
+          </div>
           <div>
             <div className="card-title character-name">Aditya Pawar</div>
             <div className="card-subtitle">

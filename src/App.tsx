@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import arrowLeftIcon from "pixelarticons/svg/arrow-left.svg?url";
+import arrowRightIcon from "pixelarticons/svg/arrow-right.svg?url";
+import closeIcon from "pixelarticons/svg/close.svg?url";
 import fileTextIcon from "pixelarticons/svg/file-text.svg?url";
 import githubIcon from "pixelarticons/svg/github.svg?url";
 import linkedinIcon from "pixelarticons/svg/linkedin.svg?url";
@@ -89,6 +91,7 @@ function getRouteFromHash(): PortfolioSectionId | "404" | null {
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isIntroDismissed, setIsIntroDismissed] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [activeSection, setActiveSection] = useState<PortfolioSectionId | "404" | null>(
     getRouteFromHash,
@@ -187,6 +190,13 @@ export default function App() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isIntroDismissed) {
+        if (event.key === "Escape" && !isLoading) {
+          setIsIntroDismissed(true);
+          playSound("ding", 0.18);
+        }
+        return;
+      }
       if (activeSection || isTutorialActive) return;
       if (document.getElementById("realm-popover")) return;
       if (!["ArrowDown", "ArrowUp", "Enter"].includes(event.key)) return;
@@ -217,6 +227,8 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     activeSection,
+    isIntroDismissed,
+    isLoading,
     isTutorialActive,
     navigateToSection,
     playSound,
@@ -422,43 +434,6 @@ export default function App() {
         </>
       )}
 
-      {!isLoading && analyticsConsent === null && (
-        <section
-          aria-label="Analytics cookie preferences"
-          aria-live="polite"
-          className="cookie-banner pixel-card"
-        >
-          <div className="cookie-copy">
-            <div className="card-title">Optional analytics</div>
-            <div className="card-copy">
-              Allow anonymous usage data to help improve this portfolio. No advertising trackers.
-            </div>
-          </div>
-          <div className="cookie-actions">
-            <Button
-              onClick={() => {
-                localStorage.setItem("portfolio-analytics-consent", "declined");
-                setAnalyticsConsent("declined");
-                playSound("ding", 0.18);
-              }}
-              variant="ghost"
-            >
-              Decline
-            </Button>
-            <Button
-              onClick={() => {
-                localStorage.setItem("portfolio-analytics-consent", "accepted");
-                setAnalyticsConsent("accepted");
-                playSound("ding", 0.18);
-              }}
-              variant="default"
-            >
-              Accept
-            </Button>
-          </div>
-        </section>
-      )}
-
       {isTutorialActive && (
         <PortfolioTutorial
           initialStep={tutorialCheckpoint ?? 0}
@@ -489,16 +464,125 @@ export default function App() {
         </Button>
       )}
 
-      {isLoading && (
-        <div aria-label="Loading portfolio" aria-live="polite" className="loading-screen" role="status">
-          <div className="loading-emblem">AP</div>
-          <div className="loading-title">Loading Realm</div>
-          <div aria-hidden="true" className="loading-track">
-            {Array.from({ length: 12 }, (_, index) => (
-              <span key={index} />
-            ))}
+      {!isIntroDismissed && (
+        <div
+          aria-label="Welcome to Aditya Pawar's Portfolio"
+          aria-modal="true"
+          className="intro-modal-backdrop"
+          role="dialog"
+        >
+          <div className="intro-modal-card">
+            <div className="tutorial-callout-topline">
+              <span className="tutorial-step-label">PORTFOLIO SUMMARY</span>
+              {!isLoading && (
+                <Button
+                  aria-label="Close welcome modal and enter site"
+                  className="tutorial-close"
+                  onClick={() => {
+                    playSound("ding", 0.18);
+                    setIsIntroDismissed(true);
+                  }}
+                  variant="ghost"
+                >
+                  <PixelIcon source={closeIcon} />
+                </Button>
+              )}
+            </div>
+
+            <div className="intro-profile-frame">
+              <img
+                alt="Aditya Pawar"
+                className="intro-profile-img"
+                src="/profile-pic.png"
+              />
+            </div>
+
+            <div className="tutorial-title text-center">Aditya Pawar</div>
+
+            <div className="tutorial-copy">
+              Full-stack developer with startup experience building type-safe web applications, REST APIs, and offline-first desktop software. Experienced across the full development lifecycle, from relational schema design and automated testing to containerized cloud deployments. B.Tech graduate in 2026; available immediately.
+            </div>
+
+            <div className="intro-stack-row">
+              <span>TypeScript</span>
+              <span className="intro-stack-dot">·</span>
+              <span>Next.js</span>
+              <span className="intro-stack-dot">·</span>
+              <span>Node.js</span>
+              <span className="intro-stack-dot">·</span>
+              <span>PostgreSQL</span>
+            </div>
+
+            <div className="tutorial-footer">
+              {isLoading ? (
+                <>
+                  <div className="tutorial-buttons-row">
+                    <span className="tutorial-step-label">Loading realm...</span>
+                    <span className="tutorial-step-label">Preparing pixels</span>
+                  </div>
+                  <div className="skill-bar intro-loading-bar">
+                    <span
+                      style={
+                        {
+                          "--load-delay": "0s",
+                          "--load-duration": "1.6s",
+                        } as CSSProperties
+                      }
+                    />
+                  </div>
+                </>
+              ) : analyticsConsent === null ? (
+                <>
+                  <div className="intro-cookie-note">
+                    Optional analytics: Allow anonymous usage data to help improve this portfolio. No advertising trackers.
+                  </div>
+                  <div className="tutorial-buttons-row">
+                    <Button
+                      className="tutorial-explore"
+                      onClick={() => {
+                        localStorage.setItem("portfolio-analytics-consent", "declined");
+                        setAnalyticsConsent("declined");
+                        playSound("ding", 0.18);
+                        setIsIntroDismissed(true);
+                      }}
+                      variant="ghost"
+                    >
+                      Decline
+                    </Button>
+                    <div className="tutorial-step-nav">
+                      <Button
+                        className="tutorial-next"
+                        onClick={() => {
+                          localStorage.setItem("portfolio-analytics-consent", "accepted");
+                          setAnalyticsConsent("accepted");
+                          playSound("ding", 0.18);
+                          setIsIntroDismissed(true);
+                        }}
+                        variant="default"
+                      >
+                        <span>Accept</span>
+                        <PixelIcon source={arrowRightIcon} />
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="tutorial-buttons-row justify-end">
+                  <Button
+                    className="tutorial-next"
+                    onClick={() => {
+                      playSound("chord", 0.25);
+                      setIsIntroDismissed(true);
+                    }}
+                    variant="default"
+                  >
+                    <span>Enter Portfolio</span>
+                    <PixelIcon source={arrowRightIcon} />
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="loading-copy">Preparing pixels...</div>
         </div>
       )}
 
