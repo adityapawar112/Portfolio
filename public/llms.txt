@@ -7,10 +7,11 @@
 - [About Me](https://aditya112-portfolio.vercel.app/#about): Professional background, engineering approach, creative interests, and education.
 - [Skills](https://aditya112-portfolio.vercel.app/#skills): TypeScript, React, Next.js, Electron, SQL databases, security, testing, and delivery tooling.
 - [Experience](https://aditya112-portfolio.vercel.app/#experience): Production web applications, payment systems, automation, and multi-tenant platforms.
-- [Projects](https://aditya112-portfolio.vercel.app/#projects): ScaleERP Desktop and ScaleERP Web, including feature summaries, technology stacks, source links, and product screenshots.
+- [Projects](https://aditya112-portfolio.vercel.app/#projects): SynapseState, ScaleERP Desktop, and ScaleERP Web, including feature summaries, technology stacks, source links, and product screenshots.
 
 ## Selected work
 
+- [SynapseState](https://github.com/adityapawar112/SynapseState): Incident-safety & lifecycle governance layer for OpenFeature with signed emergency overrides, k3s control plane, Next.js operations portal, Playwright E2E, Stryker mutation testing, and k6 soak benchmarks.
 - [ScaleERP Desktop](https://github.com/adityapawar112/ScaleERP-Desktop): Offline-first Electron inventory and billing desktop software with SQLite.
 - [ScaleERP Web](https://github.com/adityapawar112/ScaleERP-Web): Next.js and Supabase cloud control plane for trials, licensing, and client telemetry.
 - [ScaleERP Live](https://scale-erp.vercel.app/): Live deployment of ScaleERP cloud service.
